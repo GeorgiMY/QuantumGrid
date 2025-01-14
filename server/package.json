@@ -1,0 +1,19 @@
+{
+	"name": "server",
+	"version": "1.0.0",
+	"description": "The Server Side",
+	"license": "ISC",
+	"author": "GeorgiMY",
+	"type": "commonjs",
+	"main": "./src/main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"express": "^4.21.2",
+		"node-cron": "^3.0.3"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.9"
+	}
+}

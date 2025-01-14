@@ -1,0 +1,16 @@
+{
+	"name": "client",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"author": "GeorgiMY",
+	"type": "commonjs",
+	"main": "main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "electron ."
+	},
+	"devDependencies": {
+		"electron": "^33.3.1"
+	}
+}
