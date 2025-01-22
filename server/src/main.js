@@ -23,7 +23,7 @@ function readDataFileLines(startLine, endLine) {
             return reject(new Error('Invalid line range'))
         }
 
-        const fileStream = fs.createReadStream('src/data/test.jsonl')
+        const fileStream = fs.createReadStream('data/test.jsonl')
         const rl = readline.createInterface({
             input: fileStream,
             crlfDelay: Infinity
@@ -77,8 +77,8 @@ app.get('/', async (req, res) => {
         app.locals.jsonUntill += app.locals.jsonIncrementation;
         res.json(data);
     } catch (error) {
-        console.log();
-        res.send("All files have currently been distributed.")
+        console.log(error);
+        res.send("All files have currently been distributed.");
     }
 })
 

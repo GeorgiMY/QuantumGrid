@@ -1,19 +1,19 @@
 {
-	"name": "client",
-	"version": "1.0.0",
-	"description": "",
-	"license": "ISC",
-	"author": "GeorgiMY",
-	"type": "commonjs",
-	"main": "./src/main",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "electron ."
-	},
-	"devDependencies": {
-		"electron": "^33.3.1"
-	},
-	"dependencies": {
-		"dotenv": "^16.4.7"
-	}
+    "name": "client",
+    "version": "1.0.0",
+    "description": "",
+    "license": "ISC",
+    "author": "GeorgiMY",
+    "type": "commonjs",
+    "main": "./src/main",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron ."
+    },
+    "devDependencies": {
+        "electron": "^33.3.1"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7"
+    }
 }
