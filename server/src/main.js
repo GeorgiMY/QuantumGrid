@@ -82,6 +82,20 @@ app.get('/', async (req, res) => {
     }
 })
 
+app.post('/', async (req, res) => {
+    const body = await req.body;
+
+    res.json(
+        body.osType,
+        body.cpu,
+        body.ram,
+        body.disks,
+        body.gpu,
+        body.ipAddress,
+        body.localTime
+    );
+});
+
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`)
 })
