@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Volunteer Computing Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Create a Volunteer Computing Project</h1>
+
+        <form class="bg-white shadow-md rounded-lg p-6 space-y-6">
+            <!-- Project Name -->
+            <div>
+                <label for="project-name" class="block text-lg font-semibold mb-2">Project Name</label>
+                <input type="text" id="project-name" name="project-name" placeholder="Enter your project name"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+            </div>
+
+            <!-- Additional Options -->
+            <div>
+                <label for="project-description" class="block text-lg font-semibold mb-2">Project Description
+                    (Optional)</label>
+                <textarea id="project-description" name="project-description"
+                    placeholder="Describe your project goals, data requirements, and any other details..."
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"></textarea>
+            </div>
+
+            <!-- Data Type -->
+            <div>
+                <label class="block text-lg font-semibold mb-2">Type of Data to Distribute</label>
+                <div class="space-y-2">
+                    <label class="flex items-center">
+                        <input type="radio" name="data-type" value="images" class="mr-2">
+                        Images
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="data-type" value="json" class="mr-2">
+                        JSON Files
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="data-type" value="video" class="mr-2">
+                        Videos
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="data-type" value="text" class="mr-2">
+                        Text Files
+                    </label>
+                </div>
+            </div>
+
+            <!-- Optional Data Upload -->
+            <div>
+                <label for="optional-data" class="block text-lg font-semibold mb-2">Optional: Upload Initial
+                    Data</label>
+                <input type="file" id="optional-data" name="optional-data"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                <p class="text-sm text-gray-600 mt-2">You can upload data now or at any time later.</p>
+            </div>
+
+            <!-- Work Distribution Formula -->
+            <div>
+                <label for="distribution-formula" class="block text-lg font-semibold mb-2">Work Distribution
+                    Formula</label>
+                <select id="distribution-formula" name="distribution-formula"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                    <option value="cpu-heavy">CPU-Heavy Work</option>
+                    <option value="gpu-heavy">GPU-Heavy Work</option>
+                    <option value="balanced">Balanced Distribution</option>
+                    <option value="custom">Custom Formula</option>
+                </select>
+            </div>
+
+            <!-- Terms and Conditions, Privacy Policy and Optional data sending -->
+            <div>
+                <div class="space-y-2">
+                    <label class="flex items-center">
+                        <input type="checkbox" name="terms" required class="mr-2">
+                        I agree to the <a href="#" class="text-blue-500 underline"> terms and conditions</a>.
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" name="privacy" required class="mr-2">
+                        I agree to the <a href="#" class="text-blue-500 underline"> privacy policy</a>.
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" name="data-sharing" class="mr-2">
+                        I consent to sending optional data to Quantum Grid servers.
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit"
+                    class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+                    Create Project
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
