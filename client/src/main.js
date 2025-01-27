@@ -55,6 +55,5 @@ ipcMain.handle("getInfo", (event, value) => {
 
 	});
 
-	// End the request
 	request.end();
 })

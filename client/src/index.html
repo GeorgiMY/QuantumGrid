@@ -3,17 +3,60 @@
 
 <head>
 	<meta charset="UTF-8">
-	<!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
-	<title>Hello World!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';"> -->
+
+	<title>Quantum Grid</title>
+
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 </head>
 
 <body>
-	<h1>Hello World!</h1>
+	<header>
+		<div class="logo">Quantum Grid</div>
+		<nav>
+			<ul class="nav-tabs">
+				<li><a href="#create" class="active" data-lang-key="createServer">Create Server</a></li>
+				<li><a href="#connect" data-lang-key="connectServer">Connect to Server</a></li>
+			</ul>
+		</nav>
+		<div class="language-selector">
+			<button id="language-select-btn" aria-label="Select language">
+				<i class="fas fa-globe fa-lg"></i>
+				<span id="current-language">English</span>
+				<span id="current-flag" class="flag-icon flag-icon-us"></span>
+			</button>
+			<ul id="language-dropdown" class="hidden">
+				<li data-lang="en" data-flag="us">English</li>
+				<li data-lang="bg" data-flag="bg">Български</li>
+				<li data-lang="zh" data-flag="cn">中文</li>
+				<li data-lang="pt" data-flag="pt">Português</li>
+				<li data-lang="pt-br" data-flag="br">Português (Brasil)</li>
+				<li data-lang="es" data-flag="es">Español</li>
+				<li data-lang="ja" data-flag="jp">日本語</li>
+			</ul>
+		</div>
+	</header>
+	<main>
+		<div class="main-content">
+			<div id="create" class="tab-content active">
+				<h2 data-lang-key="createServerTitle">Create Volunteer Server</h2>
+				<p data-lang-key="createServerDesc">Here you can set up and manage your volunteer computing project.
+					Configure your server settings, define tasks, and monitor project progress.</p>
+			</div>
+			<div id="connect" class="tab-content">
+				<h2 data-lang-key="connectServerTitle">Connect to Server</h2>
+				<p data-lang-key="connectServerDesc">Join existing volunteer computing projects. Enter server details,
+					choose projects to contribute to, and start sharing your computer's resources.</p>
+				<input id="connectURL" type="text">
+				<button id="getInfo" type="submit">Submit!</button>
+			</div>
+		</div>
+	</main>
 
-	<input id="connectURL" type="text">
-	<button id="getInfo" type="submit">DA!</button>
-
+	<script src="./translations.js"></script>
 	<script src="./functions.js"></script>
 </body>
 
