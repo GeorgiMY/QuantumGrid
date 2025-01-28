@@ -11,6 +11,7 @@ ipcRenderer.on("gotData", (event, json) => {
 })
 
 async function loadSystemInfo() {
+    console.log("loading system info")
     const info = await ipcRenderer.invoke('get-system-info');
     const output = `
         <h1 class="text-3xl font-bold mb-6 text-center">System Information</h1>
@@ -74,8 +75,7 @@ async function loadSystemInfo() {
         <div class="bg-white shadow-md rounded-lg p-4">
             <h2 class="text-xl font-semibold border-b pb-2 mb-4">Time</h2>
             <p><strong>Local Time:</strong> ${info.localTime}</p>
-        </div>
-`;
+        </div>`;
 
     document.getElementById('info').innerHTML = `<pre>${output}</pre>`;
 }
