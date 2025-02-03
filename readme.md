@@ -17,10 +17,17 @@
    - **Locally**: You can host the server on your own computer. The server will run as long as your computer is running.
 6. You can check all activities and logs in the **"logs"** folder.
 
+### On data distribution choice
+1. MongoDB - In the "model" folder under "/server/src/model" you'll have to define a schema which will define what is being distributed
+2. SQL
+3. (local) JSON
+4. (local) Images
+
 ### Connecting to the Server
 1. Download the Quantum Grid software:
    - PC
    - Mac
+   - Linux
 2. In the **Connect** tab, enter the base URL of the server you want to contribute to:
    - Example: https://volunteerproject.com
 3. By default, Quantum Grid will use all your resources, but you can modify this in the **Specifications** page.
