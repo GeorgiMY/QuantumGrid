@@ -1,5 +1,5 @@
 const translations = {
-	en: {
+	"en": {
 		createServer: "Create Server",
 		connectServer: "Connect to Server",
 		createServerTitle: "Create Volunteer Server",
@@ -9,7 +9,7 @@ const translations = {
 		connectServerDesc:
 			"Join existing volunteer computing projects. Enter server details, choose projects to contribute to, and start sharing your computer's resources.",
 	},
-	bg: {
+	"bg": {
 		createServer: "Създаване на сървър",
 		connectServer: "Свързване към сървър",
 		createServerTitle: "Създаване на доброволчески сървър",
@@ -19,7 +19,7 @@ const translations = {
 		connectServerDesc:
 			"Присъединете се към съществуващи проекти за доброволчески изчисления. Въведете данни за сървъра, изберете проекти, към които да допринесете, и започнете да споделяте ресурсите на вашия компютър.",
 	},
-	zh: {
+	"zh": {
 		createServer: "创建服务器",
 		connectServer: "连接到服务器",
 		createServerTitle: "创建志愿者服务器",
@@ -27,7 +27,7 @@ const translations = {
 		connectServerTitle: "连接到服务器",
 		connectServerDesc: "加入现有的志愿计算项目。输入服务器详细信息，选择要贡献的项目，并开始共享您的计算机资源。",
 	},
-	pt: {
+	"pt": {
 		createServer: "Criar Servidor",
 		connectServer: "Conectar ao Servidor",
 		createServerTitle: "Criar Servidor Voluntário",
@@ -47,7 +47,7 @@ const translations = {
 		connectServerDesc:
 			"Participe de projetos de computação voluntária existentes. Insira detalhes do servidor, escolha projetos para contribuir e comece a compartilhar os recursos do seu computador.",
 	},
-	es: {
+	"es": {
 		createServer: "Crear Servidor",
 		connectServer: "Conectar al Servidor",
 		createServerTitle: "Crear Servidor Voluntario",
@@ -57,7 +57,7 @@ const translations = {
 		connectServerDesc:
 			"Únase a proyectos de computación voluntaria existentes. Ingrese los detalles del servidor, elija proyectos para contribuir y comience a compartir los recursos de su computadora.",
 	},
-	ja: {
+	"ja": {
 		createServer: "サーバーを作成",
 		connectServer: "サーバーに接続",
 		createServerTitle: "ボランティアサーバーを作成",

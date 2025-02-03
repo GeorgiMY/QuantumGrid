@@ -1,19 +1,19 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 let functionsBridge = {
-    getInfo: async (value) => {
-        let result = await ipcRenderer.invoke("getInfo", value);
-    }
+	getInfo: async (value) => {
+		let result = await ipcRenderer.invoke("getInfo", value);
+	}
 }
 
 ipcRenderer.on("gotData", (event, json) => {
-    console.log(json);
+	console.log(json);
 })
 
 async function loadSystemInfo() {
-    console.log("loading system info")
-    const info = await ipcRenderer.invoke('get-system-info');
-    const output = `
+	console.log("loading system info")
+	const info = await ipcRenderer.invoke('get-system-info');
+	const output = `
         <h1 class="text-3xl font-bold mb-6 text-center">System Information</h1>
 
         <!-- OS Section -->
@@ -77,10 +77,9 @@ async function loadSystemInfo() {
             <p><strong>Local Time:</strong> ${info.localTime}</p>
         </div>`;
 
-    document.getElementById('info').innerHTML = `<pre>${output}</pre>`;
+	document.getElementById('info').innerHTML = `<pre>${output}</pre>`;
 }
 
 loadSystemInfo();
-
 
 contextBridge.exposeInMainWorld("functionsBridge", functionsBridge);
