@@ -1,20 +1,14 @@
-import mongoose from "mongoose";
-
-export async function connectToDb() {
-	const mongodb_uri = process.env.MONGODB_URI
-
-	if (!mongodb_uri) throw new Error("No database uri")
-
-	await mongoose.connect(mongodb_uri)
-		.then(() => {
-			console.log("Connection Successfull")
-		}).catch((err) => {
-			console.log("Received an Error: ", err)
-		})
-}
+import { connectToMongoDb } from "./utils/mongoDb";
+import { readdirSync } from "fs";
+import Mongos from "./models/Mongo"
 
 export async function readDataFromMongoDB() {
-	await connectToDb()
+	await connectToMongoDb();
+
+	const collections = Mongos.collection.find();
+
+	return collections;
+
 }
 
 export function readDataFromJson(startLine: number, endLine: number): Promise<string[]> {
@@ -70,4 +64,10 @@ export function readDataFromJson(startLine: number, endLine: number): Promise<st
 			reject(err)
 		});
 	});
+}
+
+export function readDataFromPath(path: string): string[] {
+	const fileList = readdirSync(path);
+
+	return fileList;
 }
