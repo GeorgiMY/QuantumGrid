@@ -1,6 +1,6 @@
 {
-	"volunteer-project": true,
-	"type-of-distribution": "equal",
-	"type-of-data": "images",
-	"schema-name": ""
+    "volunteer-project": true,
+    "type-of-distribution": "equal",
+    "type-of-data": "images",
+    "collection-name": ""
 }

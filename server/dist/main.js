@@ -8,10 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require('express');
-const app = express();
-const functions = require('./functions');
+const readData_1 = require("./readData");
+const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
 const PORT = 3000;
 app.locals.jsonUntill = 1;
 app.locals.jsonIncrementation = 100;
@@ -37,12 +40,14 @@ app.get('/work', (req, res) => {
     res.send("Explain what to do");
 });
 app.post('/work/recieve', (req, res) => {
+    // Recieve the work done by the
+    // run checks to see if the distributed task is done correctly 
 });
 app.get('/work/distribute', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Check if the computer has joined
     // Get his params and distribute his portion
     try {
-        const data = yield functions.readDataFileLines(app.locals.jsonUntill, app.locals.jsonUntill + app.locals.jsonIncrementation - 1);
+        const data = yield (0, readData_1.readDataFromJson)(app.locals.jsonUntill, app.locals.jsonUntill + app.locals.jsonIncrementation - 1);
         app.locals.jsonUntill += app.locals.jsonIncrementation;
         res.json(data);
     }
@@ -52,5 +57,5 @@ app.get('/work/distribute', (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 }));
 app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}`);
+    console.log(`App listening on port ${PORT}`);
 });
