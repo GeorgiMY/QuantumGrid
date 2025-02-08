@@ -12,12 +12,16 @@ export async function readDataFromMongoDB() {
     return collections;
 }
 
-export function readDataFromJson(startLine: number, endLine: number): Promise<string[]> {
+export async function readDataFromJson(startLine: number, endLine: number): Promise<string[]> {
+    const response = await fetch("../project-config.json");
+    const data = await response.json();
+    const JSONPath: string = data.JSONPath;
+
     return new Promise((resolve, reject) => {
         // Input validation
-        if (startLine < 1 || endLine < startLine) return reject(new Error('Invalid line range'))
+        if (startLine < 1 || endLine < startLine) return reject(new Error('Invalid line range'));
 
-        const fileStream = createReadStream('data/test.jsonl')
+        const fileStream = createReadStream(JSONPath)
         const rl = readline.createInterface({
             input: fileStream,
             crlfDelay: Infinity
