@@ -34,7 +34,7 @@ app.get('/work', (req: Request, res: Response) => {
 });
 
 app.post('/work/recieve', (req: Request, res: Response) => {
-    // Recieve the work done by the
+    // Recieve the work done by the device
     // run checks to see if the distributed task is done correctly 
 });
 
