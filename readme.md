@@ -1,9 +1,10 @@
 [<h1 align="center">Quantum Grid</h1>](https://www.QuantumGrid.info)
 
-### || [ENGLISH](#english) || [BULGARIAN](#bulgarian) || [PORTUGUÊS-BR](#portuguese-br) || [中文](#mandarin) || [ESPAÑOL](#spanish) || [हिंदी](#hindi) || [РУССКИЙ](#russian)
+### || [ENGLISH](#english) || [BULGARIAN](#bulgarian) || [PORTUGUÊS-BR](#portuguese-br) || [中文](#mandarin) || [ESPAÑOL](#spanish) || [हिंदी](#hindi) || [РУССКИЙ](#russian) ||
 
 
-## <a name="english"></a> Volunteer Computing Framework
+## What is Quantum Grid?
+### <a name="english"></a> Distributed Computing Framework
 
 ### Creating the Server
 1. Download the Quantum Grid software:
