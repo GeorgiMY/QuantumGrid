@@ -1,0 +1,9 @@
+{
+	"volunteer-project": false,
+	"type-of-distribution": "equal",
+	"get-local-data-from-json": true,
+	"json-path": "./data/specs/cpu.json",
+	"get-data-from-mongodb": true,
+	"atlas-collection-name": "",
+	"deposit-data-in-monodb": true
+}

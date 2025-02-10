@@ -1,38 +1,29 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.readDataFromMongoDB = readDataFromMongoDB;
-exports.readDataFromJson = readDataFromJson;
+exports.readDataLinesFromJson = readDataLinesFromJson;
+exports.readDataObjectsFromJson = readDataObjectsFromJson;
 exports.readDataFromPath = readDataFromPath;
-const mongoDb_1 = require("./utils/mongoDb");
 const fs_1 = require("fs");
-const Mongo_1 = __importDefault(require("./models/Mongo"));
 const readline_1 = __importDefault(require("readline"));
-function readDataFromMongoDB() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield (0, mongoDb_1.connectToMongoDb)();
-        const collections = Mongo_1.default.collection.find();
-        return collections;
-    });
+const mongoDBFunctions_1 = require("./utils/mongoDBFunctions");
+async function readDataFromMongoDB() {
+    const response = await fetch("../project-config.json");
+    const data = await response.json();
+    const collectionName = data.collectionName;
+    const collections = (0, mongoDBFunctions_1.findDocuments)(collectionName, 0, 5);
+    return collections;
 }
-function readDataFromJson(startLine, endLine) {
+// Read data from a JSON line by line
+async function readDataLinesFromJson(pathToJSON, startLine, endLine) {
     return new Promise((resolve, reject) => {
         // Input validation
-        if (startLine < 1 || endLine < startLine) {
+        if (startLine < 1 || endLine < startLine)
             return reject(new Error('Invalid line range'));
-        }
-        const fileStream = (0, fs_1.createReadStream)('data/test.jsonl');
+        const fileStream = (0, fs_1.createReadStream)(pathToJSON);
         const rl = readline_1.default.createInterface({
             input: fileStream,
             crlfDelay: Infinity
@@ -42,9 +33,8 @@ function readDataFromJson(startLine, endLine) {
         rl.on('line', (line) => {
             currentLine++;
             // Skip lines before start
-            if (currentLine < startLine) {
+            if (currentLine < startLine)
                 return;
-            }
             // Stop reading after end line
             if (currentLine > endLine) {
                 rl.close();
@@ -62,19 +52,47 @@ function readDataFromJson(startLine, endLine) {
         });
         rl.on('close', () => {
             // Check if we found any lines in the specified range
-            if (currentLine < startLine) {
+            if (currentLine < startLine)
                 reject(new Error('Start line is beyond file length'));
-            }
-            else {
+            else
                 resolve(results);
-            }
         });
         rl.on('error', (err) => {
             reject(err);
         });
     });
 }
+// Read data from a JSON by documents
+// NEED TO IMPROVE, currently loads the entire file instead of streaming
+async function readDataObjectsFromJson(pathToJSON, startIndex, endIndex) {
+    return new Promise((resolve, reject) => {
+        // Input validation
+        if (startIndex < 0 || endIndex < startIndex)
+            return reject(new Error('Invalid object range'));
+        const fileStream = (0, fs_1.createReadStream)(pathToJSON);
+        let jsonString = '';
+        fileStream.on('data', (chunk) => {
+            jsonString += chunk.toString();
+        });
+        fileStream.on('end', () => {
+            try {
+                const jsonData = JSON.parse(jsonString); // Parse full JSON
+                if (!Array.isArray(jsonData))
+                    return reject(new Error('JSON data is not an array'));
+                const selectedObjects = jsonData.slice(startIndex, endIndex + 1); // Extract objects in range
+                resolve(selectedObjects);
+            }
+            catch (error) {
+                reject(new Error(`Error parsing JSON: ${error}`));
+            }
+        });
+        fileStream.on('error', (error) => {
+            reject(error);
+        });
+    });
+}
+// Gets all the paths from a folder
 function readDataFromPath(path) {
-    const fileList = (0, fs_1.readdirSync)(path);
-    return fileList;
+    const filePathsList = (0, fs_1.readdirSync)(path);
+    return filePathsList;
 }

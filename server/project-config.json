@@ -1,8 +1,0 @@
-{
-    "volunteer-project": false,
-    "type-of-distribution": "equal",
-    "type-of-data": "images",
-    "collection-name": "",
-    "local-json-distribution": true,
-    "JSONPath": "data/test.jsonl"
-}
