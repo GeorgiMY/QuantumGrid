@@ -1,6 +1,0 @@
-server/node_modules
-server/dist
-
-client/node_modules
-client/.env
-client/src/training/grade-school-math/__pycache__
