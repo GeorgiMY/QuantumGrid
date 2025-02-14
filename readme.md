@@ -1,10 +1,13 @@
 [<h1 align="center">Quantum Grid</h1>](https://www.QuantumGrid.info)
 
-### || [ENGLISH](#english) || [BULGARIAN](#bulgarian) || [PORTUGUÊS-BR](#portuguese-br) || [中文](#mandarin) || [ESPAÑOL](#spanish) || [हिंदी](#hindi) || [РУССКИЙ](#russian) ||
+<h3 align=center>
 
+| [ENGLISH](#english) | [BULGARIAN](#bulgarian) | [PORTUGUÊS-BR](#portuguese-br) | [中文](#mandarin) | [ESPAÑOL](#spanish) | [हिंदी](#hindi) | [РУССКИЙ](#russian) |
 
-## What is Quantum Grid?
-### <a name="english"></a> Distributed Computing Framework
+</h3>
+
+## <a name="english">What is QuantumGrid?</a> 
+QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets you create a server which distributes data and the software for processing that data. QuantumGrid's software also lets devices connect to the specific server they want to connect with which automatically starts using their processing power to contribute to processing the data.
 
 ### Creating the Server
 1. Download the Quantum Grid software:

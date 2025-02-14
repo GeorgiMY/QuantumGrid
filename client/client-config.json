@@ -3,35 +3,5 @@
         "ram": 75,
         "cpu": 25
     },
-    "specs": {
-        "OS": "${info.osType}",
-        "CPU": {
-            "Model": "${info.cpu.model}",
-            "Speed": "${info.cpu.speed}",
-            "Cores": "${info.cpu.cores}",
-            "Cache": ""
-        },
-        "RAM": {
-            "Total": "${info.ram.total}",
-            "Free": "${info.ram.free}"
-        },
-        "Disks": {
-            "Mount": "disk.mount",
-            "Type": "disk.type",
-            "Total": "disk.total",
-            "Free": "disk.free"
-        },
-        "GPU": {
-            "Model": "gpu.model",
-            "Vendor": "gpu.vendor",
-            "Memory": "gpu.memory",
-            "Cores": "gpu.cores"
-        },
-        "Network": {
-            "IP Address": "${info.ipAddress}"
-        },
-        "Time": {
-            "Local Time": "${info.localTime}"
-        }
-    }
+    "url": "https://www.google.com"
 }
