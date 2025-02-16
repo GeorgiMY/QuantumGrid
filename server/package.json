@@ -1,25 +1,27 @@
 {
-	"name": "server",
-	"version": "1.1.0",
-	"description": "The Server Side",
-	"license": "ISC",
-	"author": "GeorgiMY",
-	"type": "commonjs",
-	"main": "./dist/main.js",
-	"scripts": {
-		"start": "tsc && nodemon ./src/main",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"dependencies": {
-		"express": "^4.21.2",
-		"mongoose": "^8.9.6",
-		"node-cron": "^3.0.3"
-	},
-	"devDependencies": {
-		"@types/express": "^5.0.0",
-		"@types/mongoose": "^5.11.97",
-		"@types/node": "^22.13.0",
-		"nodemon": "^3.1.9",
-		"typescript": "^5.7.3"
-	}
+    "name": "server",
+    "version": "1.1.0",
+    "description": "The Server Side",
+    "license": "ISC",
+    "author": "GeorgiMY",
+    "type": "commonjs",
+    "main": "./dist/main.js",
+    "scripts": {
+        "start": "tsc && nodemon ./src/main",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "express": "^4.21.2",
+        "mongoose": "^8.9.6",
+        "node-cron": "^3.0.3",
+        "ws": "^8.18.0"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.0",
+        "@types/mongoose": "^5.11.97",
+        "@types/node": "^22.13.0",
+        "@types/ws": "^8.5.14",
+        "nodemon": "^3.1.9",
+        "typescript": "^5.7.3"
+    }
 }
