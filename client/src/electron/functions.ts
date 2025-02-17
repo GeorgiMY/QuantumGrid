@@ -2,82 +2,45 @@ import os from "os";
 import si from "systeminformation";
 import fs from "fs";
 
-const info = document.getElementById("getInfo")
-info?.addEventListener("click", getInfo);
+// async function getSpecs() {
+//     const osType = os.type();
+//     const cpu = os.cpus()[0]; // Get the first CPU info
+//     const totalRam = (os.totalmem() / (1024 ** 3)).toFixed(2) + ' GB';
+//     const totalFreeRam = (os.freemem() / (1024 ** 3)).toFixed(2) + ' GB';
+//     const disks = await si.fsSize(); // Disk information
+//     const gpu = await si.graphics(); // GPU information
+//     const ipAddress = await getPublicIP();
+//     const localTime = new Date().toLocaleString();
 
-function getInfo() {
-    if (!info) return;
-    const input = document.getElementById("connectURL")
-    if (!input) return;
-    const url = input.nodeValue
-    console.log(url);
-    // window.functionsBridge.getInfo(url);
-}
+//     const specs: Specs = {
+//         osType,
+//         cpu: {
+//             model: cpu.model,
+//             speed: `${cpu.speed} MHz`,
+//             cores: os.cpus().length,
+//         },
+//         ram: {
+//             total: totalRam,
+//             free: totalFreeRam,
+//         },
+//         disks: disks.map((disk) => ({
+//             mount: disk.mount,
+//             type: disk.type,
+//             total: (disk.size / (1024 ** 3)).toFixed(2) + ' GB',
+//             free: (disk.available / (1024 ** 3)).toFixed(2) + ' GB',
+//         })),
+//         gpu: gpu.controllers.map((controller) => ({
+//             model: controller.model,
+//             vendor: controller.vendor,
+//             memory: controller.vram ? `${controller.vram} MB` : 'N/A',
+//             cores: controller.cores,
+//         })),
+//         ipAddress,
+//         localTime,
+//     };
 
-async function sendPOSTRequest(url: string, specs: Specs) {
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(specs)
-        });
-
-        return await response.json();
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
-async function getSpecs() {
-    const osType = os.type();
-    const cpu = os.cpus()[0]; // Get the first CPU info
-    const totalRam = (os.totalmem() / (1024 ** 3)).toFixed(2) + ' GB';
-    const totalFreeRam = (os.freemem() / (1024 ** 3)).toFixed(2) + ' GB';
-    const disks = await si.fsSize(); // Disk information
-    const gpu = await si.graphics(); // GPU information
-    const ipAddress = await getPublicIP();
-    const localTime = new Date().toLocaleString();
-
-    const specs: Specs = {
-        osType,
-        cpu: {
-            model: cpu.model,
-            speed: `${cpu.speed} MHz`,
-            cores: os.cpus().length,
-        },
-        ram: {
-            total: totalRam,
-            free: totalFreeRam,
-        },
-        disks: disks.map((disk) => ({
-            mount: disk.mount,
-            type: disk.type,
-            total: (disk.size / (1024 ** 3)).toFixed(2) + ' GB',
-            free: (disk.available / (1024 ** 3)).toFixed(2) + ' GB',
-        })),
-        gpu: gpu.controllers.map((controller) => ({
-            model: controller.model,
-            vendor: controller.vendor,
-            memory: controller.vram ? `${controller.vram} MB` : 'N/A',
-            cores: controller.cores,
-        })),
-        ipAddress,
-        localTime,
-    };
-
-    return specs;
-}
-
-async function sendDeviceSpecs() {
-    const response = await fetch("./client-config.json");
-    const data = await response.json();
-
-    // Sends the specs to the defined url in the config
-    const urlToSend: string = data.url;
-    const specs = await getSpecs();
-
-    await sendPOSTRequest(urlToSend, specs);
-}
+//     return specs;
+// }
 
 async function getPublicIP(): Promise<string> {
     try {
@@ -108,6 +71,28 @@ export function generateServerJSONFile(volunteerProject: string, typeOfDistribut
             throw err;
         }
         console.log("server-config.json has been successfully created.");
+    });
+}
+
+export async function connectToServerUsingWS(): Promise<WebSocket> {
+    const ws = new window.WebSocket('ws://localhost:3000/work/distribute');
+
+    ws.onopen = () => {
+        console.log('Connected to the server');
+        ws.send('Hello server!');
+    };
+
+    ws.onmessage = (event: MessageEvent) => {
+        console.log(`Received from server: ${event.data}`);
+    };
+
+    ws.onclose = () => {
+        console.log('Disconnected from server');
+    };
+
+    return new Promise<WebSocket>((resolve, reject) => {
+        ws.onopen = () => resolve(ws);
+        ws.onerror = (error: Event) => reject(error);
     });
 }
 

@@ -58,7 +58,8 @@ app.post('/work/recieve', (req: Request, res: Response) => {
 
 app.get('/work/distribute', async (req: Request, res: Response) => {
     // Work page WebSocket
-    const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/work/distribute`);
+    // const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/work/distribute`);
+    const ws = new WebSocket(`ws://localhost:3000/work/distribute`);
 
     ws.onopen = () => {
         console.log('Connected to work/distribute');
@@ -71,6 +72,7 @@ app.get('/work/distribute', async (req: Request, res: Response) => {
     ws.onclose = () => {
         console.log('WebSocket connection closed');
     };
+
     res.sendFile(path.join(__dirname, "../dist/webSocketClientSideFunctions.js"));
 });
 

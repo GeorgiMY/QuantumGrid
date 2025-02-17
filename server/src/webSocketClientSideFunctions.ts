@@ -1,4 +1,4 @@
-const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/work/distribute`);
+const ws = new WebSocket(`ws://localhost:3000/work/distribute`);
 
 ws.onopen = () => {
     console.log('Connected to work/distribute');
