@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import express from 'express';
 import { createServer } from 'http';
-import { setupWebSocket } from './webSocketServerSideFunctions';
+import { setupWebSocket } from './setupWebSocket';
 import path from 'path';
+import { startSendingDataPeriodically } from './sendData';
 
 const app = express();
 const server = createServer(app);
@@ -10,10 +11,12 @@ const server = createServer(app);
 const PORT = 3000;
 app.locals.jsonUntill = 1;
 app.locals.jsonIncrementation = 100;
-app.locals.cronStarted = false;
 
 // Setup WebSocket server
 setupWebSocket(server);
+
+// Start sending data periodically (e.g., every 5 seconds)
+startSendingDataPeriodically(5);
 
 app.get('/', (req: Request, res: Response) => {
     res.send("This is a server")
@@ -45,39 +48,25 @@ app.post('/work/recieve', (req: Request, res: Response) => {
     // run checks to see if the distributed task is done correctly 
 });
 
-// app.get('/work/distribute', async (req: Request, res: Response) => {
-// 	try {
-// 		const data = await readDataObjectsFromJson("./data/specs/cpu.json", app.locals.jsonUntill, app.locals.jsonUntill + app.locals.jsonIncrementation - 1);
-// 		app.locals.jsonUntill += app.locals.jsonIncrementation;
-// 		res.json(data);
-// 	} catch (error) {
-// 		console.log(error);
-// 		res.send("All files have currently been distributed.");
-// 	}
-// });
+/* app.get('/work/distribute', async (req: Request, res: Response) => {
+    try {
+        const data = await readDataObjectsFromJson("./data/specs/cpu.json", app.locals.jsonUntill, app.locals.jsonUntill + app.locals.jsonIncrementation - 1);
+        app.locals.jsonUntill += app.locals.jsonIncrementation;
+        res.json(data);
+    } catch (error) {
+        console.log(error);
+        res.send("All files have currently been distributed.");
+    }
+}); */
 
+// When a device visits this page a websocket connection will try to be established
+// If it is successfully established the device will automatically start receiving work
 app.get('/work/distribute', async (req: Request, res: Response) => {
-    // Work page WebSocket
-    // const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/work/distribute`);
-    const ws = new WebSocket(`ws://localhost:3000/work/distribute`);
-
-    ws.onopen = () => {
-        console.log('Connected to work/distribute');
-    };
-
-    ws.onerror = (error) => {
-        console.error('WebSocket error:', error);
-    };
-
-    ws.onclose = () => {
-        console.log('WebSocket connection closed');
-    };
-
-    res.sendFile(path.join(__dirname, "../dist/webSocketClientSideFunctions.js"));
+    res.sendFile(path.join(__dirname, "../src/worker.html"));
 });
 
 app.get('/stats', async (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, "../src/client.html"));
+    res.sendFile(path.join(__dirname, "../src/stats.html"));
 });
 
 server.listen(PORT, () => {

@@ -7,7 +7,11 @@
 </h3>
 
 ## <a name="english">What is QuantumGrid?</a> 
-QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets you create a server which distributes data and the software for processing that data. QuantumGrid's software also lets devices connect to the specific server they want to connect with which automatically starts using their processing power to contribute to processing the data.
+QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets you create a server which distributes data to a device as well as the software for processing that data. QuantumGrid's software also lets devices connect to the specific server they want to connect with which automatically starts using their processing power to contribute to processing the data.
+
+### Works With:
+1. MongoDB
+1. Local JSON
 
 ### Creating the Server
 1. Download the Quantum Grid software:
@@ -42,13 +46,9 @@ QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets yo
 
 ### What’s Happening Under the Hood
 
-#### When You're Creating the Server:
-1. A production-ready Express.js server is set up.
-1. When you receive a POST API request, the server checks if the device has already received tasks.
+#### When You're Creating a Server - A production-ready Express.js server is set up.
 
-#### When You're Connecting to the Server:
-1. Every 5 seconds, your device sends a POST request sharing progress, specifications, and user information.
-
+#### When You're Connecting to a Server - Your device tries to establish a websocket connection with the server
 
 # <a name="bulgarian"></a>КВАНТОВ ГРИД
 

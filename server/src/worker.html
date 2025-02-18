@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Connections</title>
+</head>
+
+<body>
+
+    <script>
+        // const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/work/distribute`);
+        const ws = new WebSocket(`ws://localhost:3000/work/distribute`);
+
+        ws.onopen = () => {
+            console.log('Connected to work/distribute');
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        ws.onmessage = (event) => {
+            const receivedData = JSON.parse(event.data);
+            console.log('Data received from server:', receivedData);
+        }
+
+        ws.onclose = () => {
+            console.log('WebSocket connection closed');
+        };
+    </script>
+</body>
+
+</html>

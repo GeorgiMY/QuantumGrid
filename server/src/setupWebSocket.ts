@@ -1,9 +1,6 @@
 import { WebSocketServer, WebSocket } from "ws";
 import { Server } from 'http';
-
-// Track work connections only
-const workConnections = new Set<WebSocket>();
-const statsClients = new Set<WebSocket>();
+import { workConnections, statsClients, broadcastWorkCount, sendWorkCount } from './stats'; // Import from stats
 
 export function setupWebSocket(server: Server) {
     const wss = new WebSocketServer({ server });
@@ -39,21 +36,3 @@ export function setupWebSocket(server: Server) {
         });
     });
 }
-
-// Function to send work count to a specific stats client
-const sendWorkCount = (client: WebSocket) => {
-    const data = {
-        type: "workCount",
-        count: workConnections.size
-    };
-    client.send(JSON.stringify(data));
-};
-
-// Function to broadcast work count to all stats clients
-const broadcastWorkCount = () => {
-    statsClients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN) {
-            sendWorkCount(client);
-        }
-    });
-};
