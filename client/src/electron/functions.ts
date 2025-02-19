@@ -74,8 +74,8 @@ export function generateServerJSONFile(volunteerProject: string, typeOfDistribut
     });
 }
 
-export async function connectToServerUsingWS(): Promise<WebSocket> {
-    const ws = new window.WebSocket('ws://localhost:3000/work/distribute');
+export async function connectToServerUsingWS(serverURL: string) {
+    const ws = new window.WebSocket(serverURL);
 
     ws.onopen = () => {
         console.log('Connected to the server');
@@ -83,17 +83,18 @@ export async function connectToServerUsingWS(): Promise<WebSocket> {
     };
 
     ws.onmessage = (event: MessageEvent) => {
-        console.log(`Received from server: ${event.data}`);
+        const receivedData = JSON.parse(event.data);
+        console.log(`Received from server: ${JSON.stringify(receivedData)}`);
+        console.log(`Received message: ${receivedData.message}`);
+    };
+
+    ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
     };
 
     ws.onclose = () => {
         console.log('Disconnected from server');
     };
-
-    return new Promise<WebSocket>((resolve, reject) => {
-        ws.onopen = () => resolve(ws);
-        ws.onerror = (error: Event) => reject(error);
-    });
 }
 
 // async function loadSystemInfo() {

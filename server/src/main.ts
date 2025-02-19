@@ -18,6 +18,8 @@ setupWebSocket(server);
 // Start sending data periodically (e.g., every 5 seconds)
 startSendingDataPeriodically(5);
 
+app.use(express.json());
+
 app.get('/', (req: Request, res: Response) => {
     res.send("This is a server")
 })
