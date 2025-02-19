@@ -1,5 +1,7 @@
 import cron from "node-cron"
 import { workConnections } from './stats';
+import { readDataFromMongoDB } from "./readData";
+import path from 'path';
 
 export function startSendingDataPeriodically(period: number): cron.ScheduledTask {
     console.log(`Starting data sending every ${period} seconds`);
@@ -11,15 +13,70 @@ export function startSendingDataPeriodically(period: number): cron.ScheduledTask
     return cronJob;
 }
 
-function sendLocalData() {
+async function getTypeOfDataDistributed(): Promise<"MongoDB" | "Local JSON" | "Local files"> {
+    const response = await fetch(path.resolve(__dirname, '../server-config.json'));
+    const data = await response.json();
+    const typeOfDataDistribution = data["type-of-data-distributed"];
+
+    return typeOfDataDistribution;
+}
+
+async function getTypeOfDataDistribution(): Promise<"Equally-Distributed" | "CPU-Intensive" | "GPU-intensive" | "Memory-Intensive"> {
+    const response = await fetch(path.resolve(__dirname, '../server-config.json'));
+    const data = await response.json();
+    const typeOfDataDistribution = data["type-of-data-distribution"];
+
+    return typeOfDataDistribution;
+}
+
+async function sendDataDependingOnDataDistributed() {
+    const typeOfDataDistributed = await getTypeOfDataDistributed();
+
+    switch (typeOfDataDistributed) {
+        case "MongoDB":
+            break;
+        case "Local JSON":
+            break;
+        case "Local files":
+            break;
+        default:
+            throw new Error("At sendDataDependingOnDataDistributed() all cases failed. Unknown typeOfDataDistributed was tried");
+    }
+
+
+}
+
+async function distributeData() {
+    const typeOfDataDistribution = await getTypeOfDataDistribution();
+
+    switch (typeOfDataDistribution) {
+        case "Equally-Distributed":
+
+            break;
+        case "CPU-Intensive":
+            break;
+        case "GPU-intensive":
+            break;
+        case "Memory-Intensive":
+            break;
+        default:
+            throw new Error("At distributeData() all cases failed. Unknown typeOfDataDistribution was tried");
+    }
+
+
+}
+
+async function sendLocalData() {
     if (workConnections.size <= 0) return;
 
     console.log("local data is being sent");
-    const dataToSend = {
-        message: "This is real-time data from the server!",
-        timestamp: new Date().toISOString(),
-        clientCount: workConnections.size
-    };
+    // const dataToSend = {
+    //     message: "This is real-time data from the server!",
+    //     timestamp: new Date().toISOString(),
+    //     clientCount: workConnections.size
+    // };
+
+    const dataToSend = await readDataFromMongoDB();
 
     workConnections.forEach((client) => {
         if (client.readyState) {

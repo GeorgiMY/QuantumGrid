@@ -74,12 +74,16 @@ export function generateServerJSONFile(volunteerProject: string, typeOfDistribut
     });
 }
 
+let ws: WebSocket | null = null; // Declare a variable to hold the WebSocket instance
+
 export async function connectToServerUsingWS(serverURL: string) {
-    const ws = new window.WebSocket(serverURL);
+    ws = new window.WebSocket(serverURL);
 
     ws.onopen = () => {
-        console.log('Connected to the server');
-        ws.send('Hello server!');
+        if (ws) { // Check if ws is not null
+            console.log('Connected to the server');
+            ws.send('Hello server!');
+        }
     };
 
     ws.onmessage = (event: MessageEvent) => {
@@ -94,7 +98,15 @@ export async function connectToServerUsingWS(serverURL: string) {
 
     ws.onclose = () => {
         console.log('Disconnected from server');
+        ws = null; // Clear the WebSocket instance on close
     };
+}
+
+export function disconnectFromServer() {
+    if (ws) {
+        ws.close(); // Close the WebSocket connection
+        console.log('Disconnected from server');
+    }
 }
 
 // async function loadSystemInfo() {

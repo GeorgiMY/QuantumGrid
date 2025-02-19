@@ -28,18 +28,21 @@ async function findDocument(collectionName: string, query: Record<string, any>) 
     }
 }
 
-// Gets documents from the start number of documents to the end number of documents
+// Find documents from a collection
 export async function findDocuments(collectionName: string, start: number, end: number) {
+    await connectToMongoDb();
+
     const collection = mongoose.connection.collection(collectionName);
 
     try {
-        const documents = await collection.find()
+        const documents = await collection.find({})
             .skip(start) // Skip the first 'start' documents
             .limit(end - start) // Limit the number of documents returned
             .toArray(); // Convert the cursor to an array
         return documents;
     } catch (error) {
         console.error('Error retrieving documents:', error);
+        throw error; // Rethrow the error for further handling
     }
 }
 

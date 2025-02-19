@@ -4,6 +4,8 @@ import { createServer } from 'http';
 import { setupWebSocket } from './setupWebSocket';
 import path from 'path';
 import { startSendingDataPeriodically } from './sendData';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const server = createServer(app);
@@ -64,9 +66,10 @@ app.post('/work/recieve', (req: Request, res: Response) => {
 // When a device visits this page a websocket connection will try to be established
 // If it is successfully established the device will automatically start receiving work
 app.get('/work/distribute', async (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, "../src/worker.html"));
+    res.status(200);
 });
 
+// When a user visits /stats they get the amount of device connected and currently working
 app.get('/stats', async (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../src/stats.html"));
 });

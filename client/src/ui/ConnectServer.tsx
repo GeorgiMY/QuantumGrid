@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { connectToServerUsingWS } from '../electron/functions';
+import { connectToServerUsingWS, disconnectFromServer } from '../electron/functions';
 
 function ConnectServer() {
     const [connectionStatus, setConnectionStatus] = useState("");
@@ -26,6 +26,12 @@ function ConnectServer() {
         }
     };
 
+    const handleDisconnect = () => {
+        disconnectFromServer(); // Call the disconnect function
+        setIsConnected(false);
+        setConnectionStatus("Disconnected from the server.");
+    };
+
     return (
         <div className="tab-content">
             <h2 data-lang-key="connectServerTitle">Connect to Server</h2>
@@ -42,10 +48,17 @@ function ConnectServer() {
             />
             <button
                 onClick={handleConnect}
-                disabled={isLoading}
+                disabled={isLoading || isConnected}
                 className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 mt-4" >
                 {isLoading ? "Connecting..." : "Connect to Server"}
             </button>
+            {isConnected && (
+                <button
+                    onClick={handleDisconnect}
+                    className="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300 mt-4" >
+                    Disconnect from Server
+                </button>
+            )}
             {connectionStatus && <p>{connectionStatus}</p>}
         </div>
     );

@@ -1,12 +1,13 @@
-import { readdirSync, createReadStream } from "fs";
+import { readdirSync, createReadStream, readFileSync } from "fs";
 import readline from "readline"
 import { findDocuments } from "./utils/mongoDBFunctions";
+import path from "path";
 
 // Gets a specific number of documents from a collection specified in the project-config.json
 export async function readDataFromMongoDB() {
-    const response = await fetch("../project-config.json");
-    const data = await response.json();
-    const collectionName: string = data.collectionName;
+    const configPath = path.resolve(__dirname, '../server-config.json');
+    const data = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const collectionName: string = data["mongodb-collection-name"];
 
     const documents = findDocuments(collectionName, 0, 5)
 
