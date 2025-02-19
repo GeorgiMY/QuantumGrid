@@ -1,229 +1,229 @@
-import { useState } from "react";
-import { useLanguage } from './LanguageContext';
+import type React from "react"
+import { useState } from "react"
+import { useLanguage } from "./LanguageContext"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 
 interface FormData {
-    projectName: string;
-    projectDescription: string;
-    dataType: "images" | "json" | "video" | "text";
-    optionalData: File | null;
-    distributionFormula: "cpu-heavy" | "gpu-heavy" | "balanced" | "custom";
-    terms: boolean;
-    privacy: boolean;
-    dataSharing: boolean;
+    projectName: string
+    projectDescription: string
+    dataType: "MongoDB" | "Local-JSON" | "Local-Files"
+    optionalData: File | null
+    distributionFormula: "Equally-Distributed" | "CPU-Intensive" | "GPU-intensive" | "Memory-Intensive" | "Custom"
+    terms: boolean
+    privacy: boolean
+    dataSharing: boolean
 }
 
 const initialFormData: FormData = {
     projectName: "",
     projectDescription: "",
-    dataType: "images",
+    dataType: "MongoDB",
     optionalData: null,
-    distributionFormula: "cpu-heavy",
+    distributionFormula: "CPU-Intensive",
     terms: false,
     privacy: false,
     dataSharing: false,
-};
+}
 
 const dataTypes = [
-    { value: "images", translationKey: "dataTypeImages" },
-    { value: "json", translationKey: "dataTypeJson" },
-    { value: "video", translationKey: "dataTypeVideo" },
-    { value: "text", translationKey: "dataTypeText" },
-] as const;
+    { value: "MongoDB", translationKey: "mongoDB" },
+    { value: "Local-JSON", translationKey: "jsonLocal" },
+    { value: "Local-Files", translationKey: "localFiles" },
+] as const
 
 const distributionOptions = [
-    { value: "cpu-heavy", translationKey: "cpuHeavy" },
-    { value: "gpu-heavy", translationKey: "gpuHeavy" },
-    { value: "balanced", translationKey: "balanced" },
-    { value: "custom", translationKey: "custom" },
-] as const;
+    { value: "CPU-Intensive", translationKey: "cpuIntensive" },
+    { value: "GPU-intensive", translationKey: "gpuIntensive" },
+    { value: "Equally-Distributed", translationKey: "equalDistribution" },
+    { value: "Memory-Intensive", translationKey: "memoryIntensive" },
+    { value: "Custom", translationKey: "customDistribution" },
+] as const
 
-function CreateServer() {
-    const { translations } = useLanguage();
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+export function CreateServer() {
+    const { translations } = useLanguage()
+    const [formData, setFormData] = useState<FormData>(initialFormData)
 
-    const handleInputChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-    ) => {
-        const { name, value, type } = e.target;
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value, type } = e.target
         setFormData((prev) => ({
             ...prev,
             [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-        }));
-    };
+        }))
+    }
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0] || null;
-        setFormData((prev) => ({ ...prev, optionalData: file }));
-    };
+        const file = e.target.files?.[0] || null
+        setFormData((prev) => ({ ...prev, optionalData: file }))
+    }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
-            console.log("Form Data Submitted:", formData);
+            console.log("Form Data Submitted:", formData)
             // Add your form submission logic here
         } catch (error) {
-            console.error("Error submitting form:", error);
+            console.error("Error submitting form:", error)
         }
-    };
+    }
 
     return (
-        <div className="container mx-auto p-6">
-            <h1 className="text-3xl font-bold mb-6 text-center">
-                {translations.createProject}
-            </h1>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+            <Card className="w-full max-w-3xl">
+                <CardHeader>
+                    <CardTitle className="text-2xl font-bold">{translations.createProject}</CardTitle>
+                    <CardDescription className="text-base mt-2">{translations.createServerDesc}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="project-name" className="text-sm font-medium">
+                                {translations.projectName}
+                            </Label>
+                            <Input
+                                id="project-name"
+                                name="projectName"
+                                placeholder={translations.projectNamePlaceholder}
+                                value={formData.projectName}
+                                onChange={handleInputChange}
+                                className="text-base p-3"
+                                required
+                            />
+                        </div>
 
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 space-y-6">
-                {/* Project Name */}
-                <div>
-                    <label htmlFor="project-name" className="block text-lg font-semibold mb-2">
-                        {translations.projectName}
-                    </label>
-                    <input
-                        type="text"
-                        id="project-name"
-                        name="projectName"
-                        placeholder={translations.projectNamePlaceholder}
-                        value={formData.projectName}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-                        required
-                    />
-                </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="project-description" className="text-sm font-medium">
+                                {translations.projectDescription}
+                            </Label>
+                            <Textarea
+                                id="project-description"
+                                name="projectDescription"
+                                placeholder={translations.projectDescPlaceholder}
+                                value={formData.projectDescription}
+                                onChange={handleInputChange}
+                                className="text-base p-3"
+                            />
+                        </div>
 
-                {/* Project Description */}
-                <div>
-                    <label htmlFor="project-description" className="block text-lg font-semibold mb-2">
-                        {translations.projectDescription}
-                    </label>
-                    <textarea
-                        id="project-description"
-                        name="projectDescription"
-                        placeholder={translations.projectDescPlaceholder}
-                        value={formData.projectDescription}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-                    />
-                </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="data-type" className="text-sm font-medium">
+                                {translations.dataTypeLabel}
+                            </Label>
+                            <Select
+                                name="dataType"
+                                value={formData.dataType}
+                                onValueChange={(value) => setFormData((prev) => ({ ...prev, dataType: value as FormData["dataType"] }))}
+                            >
+                                <SelectTrigger id="data-type" className="text-base p-3">
+                                    <SelectValue placeholder="Select data type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {dataTypes.map(({ value, translationKey }) => (
+                                        <SelectItem key={value} value={value}>
+                                            {translations[translationKey]}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
 
-                {/* Data Type */}
-                <div>
-                    <label className="block text-lg font-semibold mb-2">
-                        {translations.dataTypeLabel}
-                    </label>
-                    <div className="space-y-2">
-                        {dataTypes.map(({ value, translationKey }) => (
-                            <label key={value} className="flex items-center">
-                                <input
-                                    type="radio"
-                                    name="dataType"
-                                    value={value}
-                                    checked={formData.dataType === value}
-                                    onChange={handleInputChange}
-                                    className="mr-2"
+                        <div className="space-y-2">
+                            <Label htmlFor="optional-data" className="text-sm font-medium">
+                                {translations.optionalDataUpload}
+                            </Label>
+                            <Input
+                                id="optional-data"
+                                name="optionalData"
+                                type="file"
+                                onChange={handleFileChange}
+                                className="text-base"
+                            />
+                            <p className="text-xs text-muted-foreground mt-1">{translations.optionalDataHint}</p>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="distribution-formula" className="text-sm font-medium">
+                                {translations.distributionFormula}
+                            </Label>
+                            <Select
+                                name="distributionFormula"
+                                value={formData.distributionFormula}
+                                onValueChange={(value) =>
+                                    setFormData((prev) => ({ ...prev, distributionFormula: value as FormData["distributionFormula"] }))
+                                }
+                            >
+                                <SelectTrigger id="distribution-formula" className="text-base p-3">
+                                    <SelectValue placeholder="Select distribution formula" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {distributionOptions.map(({ value, translationKey }) => (
+                                        <SelectItem key={value} value={value}>
+                                            {translations[translationKey]}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="terms"
+                                    name="terms"
+                                    checked={formData.terms}
+                                    onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, terms: checked as boolean }))}
                                 />
-                                {translations[translationKey]}
-                            </label>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Optional Data Upload */}
-                <div>
-                    <label htmlFor="optional-data" className="block text-lg font-semibold mb-2">
-                        {translations.optionalDataUpload}
-                    </label>
-                    <input
-                        type="file"
-                        id="optional-data"
-                        name="optionalData"
-                        onChange={handleFileChange}
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-                    />
-                    <p className="text-sm text-gray-600 mt-2">
-                        {translations.optionalDataHint}
-                    </p>
-                </div>
-
-                {/* Work Distribution Formula */}
-                <div>
-                    <label htmlFor="distribution-formula" className="block text-lg font-semibold mb-2">
-                        {translations.distributionFormula}
-                    </label>
-                    <select
-                        id="distribution-formula"
-                        name="distributionFormula"
-                        value={formData.distributionFormula}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-                    >
-                        {distributionOptions.map(({ value, translationKey }) => (
-                            <option key={value} value={value}>
-                                {translations[translationKey]}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                {/* Terms and Conditions */}
-                <div className="space-y-2">
-                    <label className="flex items-center">
-                        <input
-                            type="checkbox"
-                            name="terms"
-                            checked={formData.terms}
-                            onChange={handleInputChange}
-                            className="mr-2"
-                            required
-                        />
-                        <span>
-                            {translations.termsAgree}{" "}
-                            <a href="/tos" className="text-blue-500 underline">
-                                {translations.termsLink}
-                            </a>
-                            .
-                        </span>
-                    </label>
-                    <label className="flex items-center">
-                        <input
-                            type="checkbox"
-                            name="privacy"
-                            checked={formData.privacy}
-                            onChange={handleInputChange}
-                            className="mr-2"
-                            required
-                        />
-                        <span>
-                            {translations.privacyAgree}{" "}
-                            <a href="/pp" className="text-blue-500 underline">
-                                {translations.privacyLink}
-                            </a>
-                            .
-                        </span>
-                    </label>
-                    <label className="flex items-center">
-                        <input
-                            type="checkbox"
-                            name="dataSharing"
-                            checked={formData.dataSharing}
-                            onChange={handleInputChange}
-                            className="mr-2"
-                        />
-                        {translations.dataConsent}
-                    </label>
-                </div>
-
-                {/* Submit Button */}
-                <div className="text-center">
-                    <button
-                        type="submit"
-                        className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
-                    >
+                                <Label htmlFor="terms" className="text-sm leading-none">
+                                    {translations.termsAgree}{" "}
+                                    <a href="/tos" className="text-blue-500 underline">
+                                        {translations.termsLink}
+                                    </a>
+                                    .
+                                </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="privacy"
+                                    name="privacy"
+                                    checked={formData.privacy}
+                                    onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, privacy: checked as boolean }))}
+                                />
+                                <Label htmlFor="privacy" className="text-sm leading-none">
+                                    {translations.privacyAgree}{" "}
+                                    <a href="/pp" className="text-blue-500 underline">
+                                        {translations.privacyLink}
+                                    </a>
+                                    .
+                                </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <Checkbox
+                                    id="dataSharing"
+                                    name="dataSharing"
+                                    checked={formData.dataSharing}
+                                    onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, dataSharing: checked as boolean }))}
+                                />
+                                <Label htmlFor="dataSharing" className="text-sm leading-none">
+                                    {translations.dataConsent}
+                                </Label>
+                            </div>
+                        </div>
+                    </form>
+                </CardContent>
+                <CardFooter>
+                    <Button type="submit" className="w-full text-base py-5">
                         {translations.createProjectButton}
-                    </button>
-                </div>
-            </form>
+                    </Button>
+                </CardFooter>
+            </Card>
         </div>
-    );
+    )
 }
 
-export default CreateServer;
+export default CreateServer
+

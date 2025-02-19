@@ -13,7 +13,7 @@ export function startSendingDataPeriodically(period: number): cron.ScheduledTask
     return cronJob;
 }
 
-async function getTypeOfDataDistributed(): Promise<"MongoDB" | "Local JSON" | "Local files"> {
+async function getTypeOfDataDistributed(): Promise<"MongoDB" | "Local-JSON" | "Local-Files"> {
     const response = await fetch(path.resolve(__dirname, '../server-config.json'));
     const data = await response.json();
     const typeOfDataDistribution = data["type-of-data-distributed"];
@@ -35,9 +35,9 @@ async function sendDataDependingOnDataDistributed() {
     switch (typeOfDataDistributed) {
         case "MongoDB":
             break;
-        case "Local JSON":
+        case "Local-JSON":
             break;
-        case "Local files":
+        case "Local-Files":
             break;
         default:
             throw new Error("At sendDataDependingOnDataDistributed() all cases failed. Unknown typeOfDataDistributed was tried");

@@ -64,7 +64,7 @@ export async function readDataLinesFromJson(pathToJSON: string, startLine: numbe
     });
 }
 
-// Read data from a local JSON file by documents
+// Read data from a local JSON file by streaming a document
 export async function readDataObjectsFromJson(pathToJSON: string, startIndex: number, endIndex: number): Promise<any[]> {
     return new Promise((resolve, reject) => {
         // Input validation
