@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Loader2, AlertCircle, CheckCircle2, XCircle } from "lucide-react"
-import { connectToServerUsingWS, disconnectFromServer } from "../electron/functions"
+import { connectToServer, disconnectFromServer } from "../electron/websocketFunctions"
 
 export function ConnectServer() {
     const [connectionStatus, setConnectionStatus] = useState<string | null>(null)
@@ -20,7 +20,7 @@ export function ConnectServer() {
 
         setIsLoading(true)
         try {
-            await connectToServerUsingWS(`ws://${serverURL}`)
+            await connectToServer(`ws://${serverURL}`)
             setIsConnected(true)
             setConnectionStatus("Connected to the server!")
         } catch (error) {
