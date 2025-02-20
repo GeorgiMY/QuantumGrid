@@ -70,11 +70,6 @@ async function sendLocalData() {
     if (workConnections.size <= 0) return;
 
     console.log("local data is being sent");
-    // const dataToSend = {
-    //     message: "This is real-time data from the server!",
-    //     timestamp: new Date().toISOString(),
-    //     clientCount: workConnections.size
-    // };
 
     const dataToSend = await readDataFromMongoDB();
 

@@ -11,8 +11,6 @@ const app = express();
 const server = createServer(app);
 
 const PORT = 3000;
-app.locals.jsonUntill = 1;
-app.locals.jsonIncrementation = 100;
 
 // Setup WebSocket server
 setupWebSocket(server);
@@ -52,7 +50,10 @@ app.post('/work/recieve', (req: Request, res: Response) => {
     // run checks to see if the distributed task is done correctly 
 });
 
-/* app.get('/work/distribute', async (req: Request, res: Response) => {
+
+/*app.locals.jsonUntill = 1;
+app.locals.jsonIncrementation = 100;
+app.get('/work/distribute', async (req: Request, res: Response) => {
     try {
         const data = await readDataObjectsFromJson("./data/specs/cpu.json", app.locals.jsonUntill, app.locals.jsonUntill + app.locals.jsonIncrementation - 1);
         app.locals.jsonUntill += app.locals.jsonIncrementation;
