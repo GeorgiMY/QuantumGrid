@@ -33,14 +33,14 @@ function Header({ setPage }: HeaderProps) {
 
     return (
         <header className="flex items-center justify-between px-6 py-3 bg-gray-900 text-white shadow-md">
-            <div className="text-2xl font-semibold text-white">Quantum Grid</div>
+            <button onClick={() => setPage("home")} className="text-2xl cursor-pointer font-semibold text-white">Quantum Grid</button>
 
             <nav>
                 <ul className="flex space-x-6">
                     <li>
                         <button
                             onClick={() => setPage("create")}
-                            className="flex items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition"
+                            className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition"
                         >
                             <PlusCircle size={20} />
                             {translations.createServer}
@@ -49,8 +49,7 @@ function Header({ setPage }: HeaderProps) {
                     <li>
                         <button
                             onClick={() => setPage("connect")}
-                            className="flex items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition"
-                        >
+                            className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition" >
                             <Network size={20} />
                             {translations.connectServer}
                         </button>
@@ -58,10 +57,9 @@ function Header({ setPage }: HeaderProps) {
                     <li>
                         <button
                             onClick={() => setPage("specs")}
-                            className="flex items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition"
-                        >
+                            className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition" >
                             <Cpu size={20} />
-                            Computer Specs
+                            {translations.computerSpecs}
                         </button>
                     </li>
                 </ul>
@@ -71,7 +69,7 @@ function Header({ setPage }: HeaderProps) {
                 <button
                     aria-label="Select language"
                     onClick={toggleDropdown}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded hover:bg-gray-700 transition"
+                    className="flex cursor-pointer items-center gap-2 px-4 py-2 bg-gray-800 rounded hover:bg-gray-700 transition"
                 >
                     <span>{selectedLanguage.name}</span>
                     <ChevronDown size={16} />

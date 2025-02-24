@@ -45,16 +45,29 @@ type Translation = {
     optionalDataUpload: string;
     optionalDataHint: string;
     distributionFormula: string;
-    cpuHeavy: string;
-    gpuHeavy: string;
-    balanced: string;
-    custom: string;
+    cpuIntensive: string;
+    gpuIntensive: string;
+    memoryIntensive: string;
+    equalDistribution: string;
+    customDistribution: string;
     termsAgree: string;
     termsLink: string;
     privacyAgree: string;
     privacyLink: string;
     dataConsent: string;
     createProjectButton: string;
+    connectingToServer: string;
+    disconnectFromServer: string;
+    statusFailedConnecting: string;
+    statusJustConnected: string;
+    statusAlreadyConnected: string;
+    connectedStatus: string;
+    enterServerURL: string;
+    mongoDB: string;
+    jsonLocal: string;
+    localFiles: string;
+    title: string;
+    homeDescription: string;
 }
 
 type UnsubscribeFunction = () => void;
