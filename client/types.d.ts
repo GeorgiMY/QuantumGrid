@@ -37,11 +37,6 @@ type Translation = {
     projectNamePlaceholder: string;
     projectDescription: string;
     projectDescPlaceholder: string;
-    dataTypeLabel: string;
-    dataTypeImages: string;
-    dataTypeJson: string;
-    dataTypeVideo: string;
-    dataTypeText: string;
     optionalDataUpload: string;
     optionalDataHint: string;
     distributionFormula: string;

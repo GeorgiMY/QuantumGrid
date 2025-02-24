@@ -42,8 +42,6 @@ async function sendDataDependingOnDataDistributed() {
         default:
             throw new Error("At sendDataDependingOnDataDistributed() all cases failed. Unknown typeOfDataDistributed was tried");
     }
-
-
 }
 
 async function distributeData() {

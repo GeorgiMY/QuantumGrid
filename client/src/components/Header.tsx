@@ -54,14 +54,14 @@ function Header({ setPage }: HeaderProps) {
                             {translations.connectServer}
                         </button>
                     </li>
-                    <li>
+                    {/* <li>
                         <button
                             onClick={() => setPage("specs")}
                             className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition" >
                             <Cpu size={20} />
                             {translations.computerSpecs}
                         </button>
-                    </li>
+                    </li> */}
                 </ul>
             </nav>
 

@@ -5,6 +5,7 @@ import { setupWebSocket } from './setupWebSocket';
 import path from 'path';
 import { startSendingDataPeriodically } from './sendData';
 import dotenv from 'dotenv';
+import { log } from "./logging";
 dotenv.config();
 
 const app = express();
@@ -72,8 +73,14 @@ app.get('/work/distribute', async (req: Request, res: Response) => {
 
 // When a user visits /stats they get the amount of device connected and currently working
 app.get('/stats', async (req: Request, res: Response) => {
+    log("Visited stats page")
     res.sendFile(path.join(__dirname, "../src/stats.html"));
 });
+
+// When the client visits this page the software will automatically be downloaded
+app.get('/download', async (req: Request, res: Response) => {
+    res.download("../data/download/download.exe");
+})
 
 server.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

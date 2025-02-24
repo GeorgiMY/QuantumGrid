@@ -1,7 +1,7 @@
 import { WebSocketServer, WebSocket } from "ws";
 import { Server } from 'http';
-import { workConnections, statsClients, broadcastWorkCount, sendWorkCount } from './stats'; // Import from stats
-import { saveJSONFileLocally } from './receiveData'; // Import from receiveData
+import { workConnections, statsClients, broadcastWorkCount, sendWorkCount } from './stats';
+import { saveData } from './receiveData';
 
 export function setupWebSocket(server: Server) {
     const wss = new WebSocketServer({ server });
@@ -27,10 +27,9 @@ export function setupWebSocket(server: Server) {
 
         // Handle incoming messages
         ws.on("message", async (message: string) => {
-            console.log(`Received message: ${message}`); // Log the received message
             try {
-                const jsonData = JSON.parse(message); // Parse the incoming message as JSON
-                await saveJSONFileLocally(jsonData, 'receivedData.json'); // Save the JSON data
+                const jsonData: object[] = JSON.parse(message); // Parse the incoming message as JSON
+                await saveData(jsonData); // Save the JSON data to MongoDB
             } catch (error) {
                 console.error('Error processing message:', error);
             }

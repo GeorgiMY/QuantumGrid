@@ -3,7 +3,6 @@
     "type-of-data-distribution": "Equally-Distributed",
     "type-of-data-distributed": "MongoDB",
     "local-json-path": "./data/specs/cpu.json",
-    "mongodb-uri": "mongodb+srv://testUser:LjVhwS8KXUGUJEmG@cluster0.3n1qqxt.mongodb.net/sample_training?retryWrites=true&w=majority&appName=Cluster1",
     "mongodb-collection-name": "grades",
     "type-of-data-deposition": "MongoDB"
 }
