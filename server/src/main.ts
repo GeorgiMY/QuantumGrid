@@ -51,7 +51,6 @@ app.post('/work/recieve', (req: Request, res: Response) => {
     // run checks to see if the distributed task is done correctly 
 });
 
-
 /*app.locals.jsonUntill = 1;
 app.locals.jsonIncrementation = 100;
 app.get('/work/distribute', async (req: Request, res: Response) => {

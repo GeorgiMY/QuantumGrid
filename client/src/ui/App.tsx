@@ -7,6 +7,7 @@ import ConnectServer from './ConnectServer';
 import ComputerSpecs from './ComputerSpecs';
 import { LanguageProvider } from './LanguageContext';
 import Home from './Home';
+import JsonEditor from './ServerEditor';
 
 function App() {
     const [currentPage, setCurrentPage] = useState("home");
@@ -20,6 +21,7 @@ function App() {
                     {currentPage === "create" && <CreateServer />}
                     {currentPage === "connect" && <ConnectServer />}
                     {currentPage === "specs" && <ComputerSpecs />}
+                    {currentPage === "jsonEditor" && <JsonEditor />}
                 </div>
             </main>
         </LanguageProvider>

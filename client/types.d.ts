@@ -63,6 +63,17 @@ type Translation = {
     localFiles: string;
     title: string;
     homeDescription: string;
+    serverEditor: string;
+    editServerConf: string;
+    saveFile: string;
+    chooseFileBeforeSave: string;
+    confirmSave: string;
+    volunteerProject: string;
+    typeOfDataDistribution: string;
+    typeOfDataDistributed: string;
+    localJsonPath: string;
+    mongodbCollectionName: string;
+    typeOfDataDeposition: string;
 }
 
 type UnsubscribeFunction = () => void;

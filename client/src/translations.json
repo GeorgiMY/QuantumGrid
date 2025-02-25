@@ -38,7 +38,18 @@
         "statusJustConnected": "Connected to the server!",
         "statusAlreadyConnected": "Already connected to the server.",
         "connectedStatus": "Status",
-        "enterServerURL": "Enter server URL"
+        "enterServerURL": "Enter server URL",
+        "serverEditor": "Server Editor",
+        "editServerConf": "Edit Server Configuration",
+        "saveFile": "Save File",
+        "chooseFileBeforeSave": "Please choose a file before saving.",
+        "confirmSave": "Are you sure you want to save the changes?",
+        "volunteerProject": "Volunteer Project",
+        "typeOfDataDistribution": "Type of Data Distribution",
+        "typeOfDataDistributed": "Type of Data Distributed",
+        "localJsonPath": "Local JSON Path",
+        "mongodbCollectionName": "MongoDB Collection Name",
+        "typeOfDataDeposition": "Type of Data Deposition"
     },
     "bg": {
         "createServer": "Създаване на сървър",
@@ -79,7 +90,18 @@
         "statusJustConnected": "Свързано със сървъра!",
         "statusAlreadyConnected": "Вече сте свързани със сървъра.",
         "connectedStatus": "Статус",
-        "enterServerURL": "Въведете URL на сървъра"
+        "enterServerURL": "Въведете URL на сървъра",
+        "serverEditor": "Сървърен редактор",
+        "editServerConf": "Редактиране на конфигурацията на сървъра",
+        "saveFile": "Запази файла",
+        "chooseFileBeforeSave": "Моля, изберете файл преди да запазите.",
+        "confirmSave": "Сигурни ли сте, че искате да запазите промените?",
+        "volunteerProject": "Доброволчески проект",
+        "typeOfDataDistribution": "Тип на разпределение на данни",
+        "typeOfDataDistributed": "Тип на разпределените данни",
+        "localJsonPath": "Локален JSON път",
+        "mongodbCollectionName": "Име на MongoDB колекция",
+        "typeOfDataDeposition": "Тип на депозиране на данни"
     },
     "zh": {
         "createServer": "创建服务器",
@@ -120,7 +142,18 @@
         "statusJustConnected": "已连接到服务器！",
         "statusAlreadyConnected": "已经连接到服务器。",
         "connectedStatus": "状态",
-        "enterServerURL": "输入服务器URL"
+        "enterServerURL": "输入服务器URL",
+        "serverEditor": "服务器编辑器",
+        "editServerConf": "编辑服务器配置",
+        "saveFile": "保存文件",
+        "chooseFileBeforeSave": "请在保存之前选择一个文件。",
+        "confirmSave": "您确定要保存更改吗？",
+        "volunteerProject": "志愿者项目",
+        "typeOfDataDistribution": "数据分配类型",
+        "typeOfDataDistributed": "分发的数据类型",
+        "localJsonPath": "本地JSON路径",
+        "mongodbCollectionName": "MongoDB集合名称",
+        "typeOfDataDeposition": "数据存放类型"
     },
     "pt": {
         "createServer": "Criar Servidor",
@@ -161,7 +194,18 @@
         "statusJustConnected": "Conectado ao servidor!",
         "statusAlreadyConnected": "Já conectado ao servidor.",
         "connectedStatus": "Status",
-        "enterServerURL": "Digite a URL do servidor"
+        "enterServerURL": "Digite a URL do servidor",
+        "serverEditor": "Editor de Servidor",
+        "editServerConf": "Editar Configuração do Servidor",
+        "saveFile": "Salvar Arquivo",
+        "chooseFileBeforeSave": "Por favor, escolha um arquivo antes de salvar.",
+        "confirmSave": "Tem certeza de que deseja salvar as alterações?",
+        "volunteerProject": "Projeto Voluntário",
+        "typeOfDataDistribution": "Tipo de Distribuição de Dados",
+        "typeOfDataDistributed": "Tipo de Dados Distribuídos",
+        "localJsonPath": "Caminho Local do JSON",
+        "mongodbCollectionName": "Nome da Coleção MongoDB",
+        "typeOfDataDeposition": "Tipo de Deposição de Dados"
     },
     "pt-br": {
         "createServer": "Criar Servidor",
@@ -202,7 +246,18 @@
         "statusJustConnected": "Conectado ao servidor!",
         "statusAlreadyConnected": "Já conectado ao servidor.",
         "connectedStatus": "Status",
-        "enterServerURL": "Digite a URL do servidor"
+        "enterServerURL": "Digite a URL do servidor",
+        "serverEditor": "Editor de Servidor",
+        "editServerConf": "Editar Configuração do Servidor",
+        "saveFile": "Salvar Arquivo",
+        "chooseFileBeforeSave": "Por favor, escolha um arquivo antes de salvar.",
+        "confirmSave": "Tem certeza de que deseja salvar as alterações?",
+        "volunteerProject": "Projeto Voluntário",
+        "typeOfDataDistribution": "Tipo de Distribuição de Dados",
+        "typeOfDataDistributed": "Tipo de Dados Distribuídos",
+        "localJsonPath": "Caminho Local do JSON",
+        "mongodbCollectionName": "Nome da Coleção MongoDB",
+        "typeOfDataDeposition": "Tipo de Deposição de Dados"
     },
     "es": {
         "createServer": "Crear Servidor",
@@ -243,7 +298,18 @@
         "statusJustConnected": "¡Conectado al servidor!",
         "statusAlreadyConnected": "Ya estás conectado al servidor.",
         "connectedStatus": "Estado",
-        "enterServerURL": "Ingrese la URL del servidor"
+        "enterServerURL": "Ingrese la URL del servidor",
+        "serverEditor": "Editor de Servidor",
+        "editServerConf": "Editar Configuración del Servidor",
+        "saveFile": "Guardar Archivo",
+        "chooseFileBeforeSave": "Por favor, elija un archivo antes de guardar.",
+        "confirmSave": "¿Está seguro de que desea guardar los cambios?",
+        "volunteerProject": "Proyecto Voluntario",
+        "typeOfDataDistribution": "Tipo de Distribución de Datos",
+        "typeOfDataDistributed": "Tipo de Datos Distribuidos",
+        "localJsonPath": "Ruta Local de JSON",
+        "mongodbCollectionName": "Nombre de la Colección MongoDB",
+        "typeOfDataDeposition": "Tipo de Depósito de Datos"
     },
     "ja": {
         "createServer": "サーバーを作成",
@@ -284,6 +350,17 @@
         "statusJustConnected": "サーバーに接続しました！",
         "statusAlreadyConnected": "すでにサーバーに接続されています。",
         "connectedStatus": "ステータス",
-        "enterServerURL": "サーバーのURLを入力"
+        "enterServerURL": "サーバーのURLを入力",
+        "serverEditor": "サーバーエディタ",
+        "editServerConf": "サーバー設定を編集",
+        "saveFile": "ファイルを保存",
+        "chooseFileBeforeSave": "保存する前にファイルを選択してください。",
+        "confirmSave": "変更を保存してもよろしいですか？",
+        "volunteerProject": "ボランティアプロジェクト",
+        "typeOfDataDistribution": "データ配布の種類",
+        "typeOfDataDistributed": "配布されたデータの種類",
+        "localJsonPath": "ローカルJSONパス",
+        "mongodbCollectionName": "MongoDBコレクション名",
+        "typeOfDataDeposition": "データの預け入れの種類"
     }
 }

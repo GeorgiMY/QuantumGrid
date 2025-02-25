@@ -1,5 +1,5 @@
 {
-    "appId": "com.georgimy.electron-template",
+    "appId": "com.georgimy.quantum-grid",
     "files": [
         "dist-electron",
         "dist-react"
