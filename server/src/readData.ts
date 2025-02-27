@@ -1,7 +1,8 @@
-import { readdirSync, createReadStream, readFileSync } from "fs";
+import { createReadStream, readFileSync } from "fs";
 import readline from "readline"
-import { findDocuments } from "./utils/mongoDBFunctions";
+import { findDocuments } from "./mongoDBFunctions";
 import path from "path";
+import { getAllObjectIds } from "./queries";
 
 // Gets a specific number of documents from a collection specified in the project-config.json
 export async function readDataFromMongoDB() {
@@ -9,7 +10,9 @@ export async function readDataFromMongoDB() {
     const data = JSON.parse(readFileSync(configPath, 'utf-8'));
     const collectionName: string = data["mongodb-collection-name"];
 
-    const documents = findDocuments(collectionName, 0, 5)
+    const allSentOutIds = getAllObjectIds();
+
+    const documents = findDocuments(collectionName, currentIndex, incrementingIndex)
 
     if (!documents) throw new Error("Couldn't find documents");
     else return documents;
@@ -93,11 +96,4 @@ export async function readDataObjectsFromJson(pathToJSON: string, startIndex: nu
             reject(error);
         });
     });
-}
-
-// Gets all the paths from a folder
-export function readDataFromPath(path: string): string[] {
-    const filePathsList = readdirSync(path);
-
-    return filePathsList;
 }

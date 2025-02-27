@@ -72,9 +72,9 @@ async function sendLocalData() {
     const dataToSend = await readDataFromMongoDB();
 
     workConnections.forEach((client) => {
-        if (client.readyState) {
+        if (client.socket.readyState) {
             try {
-                client.send(JSON.stringify(dataToSend));
+                client.socket.send(JSON.stringify(dataToSend));
                 console.log("Data sent to client");
             } catch (error) {
                 console.error("Error sending data to client:", error);

@@ -18,7 +18,6 @@ interface ConfigData {
 
 const ServerEditor: React.FC = () => {
     const [configData, setConfigData] = useState<ConfigData | null>(null);
-    const [fileName, setFileName] = useState<string>('');
     const [filePath, setFilePath] = useState<string>('');
     const { translations } = useLanguage();
     const [showAlert, setShowAlert] = useState(false);
@@ -33,26 +32,16 @@ const ServerEditor: React.FC = () => {
         "type-of-data-deposition": translations.typeOfDataDeposition,
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            setFileName(file.name);
-            console.log(file.name);
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const content = e.target?.result;
-                if (typeof content === 'string') {
-                    try {
-                        const jsonData: ConfigData = JSON.parse(content);
-                        setConfigData(jsonData);
-                    } catch (error) {
-                        console.error("Error parsing JSON:", error);
-                    }
-                }
-            };
-            reader.readAsText(file);
-        }
-    };
+    function handleFileChange() {
+        window.electron.openDialog();
+    }
+
+    window.electron.responseOpenDialog((response: { path: string; data: ConfigData }) => {
+        setFilePath(response.path);
+        console.log("Received Path:", response.path);
+        console.log("Received Data:", response.data);
+        setConfigData(response.data);
+    });
 
     const handleChange = (key: keyof ConfigData, value: string | boolean) => {
         if (configData) {
@@ -69,9 +58,12 @@ const ServerEditor: React.FC = () => {
         const confirmSave = window.confirm(translations.confirmSave);
 
         if (confirmSave) {
-            // Call the save function from fileOperations
             try {
-                // await saveJSONToFile(configData, fileName, filePath);
+                console.log("Saving to path:", filePath);
+                if (!filePath) {
+                    throw new Error("File path is undefined. Cannot save the file.");
+                }
+                await window.electron.saveJSON(configData, filePath);
                 alert("File saved successfully!");
             } catch (error) {
                 console.error("Error saving file:", error);
@@ -87,9 +79,9 @@ const ServerEditor: React.FC = () => {
                     <CardTitle className="text-2xl font-bold">{translations.editServerConf}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <input type="file" accept=".json" onChange={handleFileChange} className="mb-4" />
+                    <Button onClick={handleFileChange} className="mb-4 cursor-pointer" >{translations.chooseFile}</Button>
                     {showAlert && (
-                        <Alert variant="destructive" className="mb-4">
+                        <Alert variant="destructive" className="mb-4" >
                             {translations.chooseFileBeforeSave}
                         </Alert>
                     )}

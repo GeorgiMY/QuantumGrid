@@ -2,17 +2,19 @@ import { WebSocketServer, WebSocket } from "ws";
 import { Server } from 'http';
 import { workConnections, statsClients, broadcastWorkCount, sendWorkCount } from './stats';
 import { saveData } from './receiveData';
+import { log } from "./logging";
 
 export function setupWebSocket(server: Server) {
     const wss = new WebSocketServer({ server });
 
-    wss.on("connection", (ws: WebSocket, req: any) => {
+    wss.on("connection", async (ws: WebSocket, req: Request) => {
         const path = req.url;
-        console.log(`New connection attempt to path: ${path}`);
+        const { macId }: { macId: string } = await req.json();
+        console.log(`New connection attempt to path: ${path} from device with MAC id: ${macId}`);
 
         if (path === '/work/distribute') {
-            workConnections.add(ws);
-            console.log(`Work client connected. Total work connections: ${workConnections.size}`);
+            workConnections.add({ socket: ws, macId });
+            log(`Client from device with MAC id: ${macId} connected. Total work connections: ${workConnections.size}`);
             broadcastWorkCount();
         } else if (path === '/stats') {
             statsClients.add(ws);
@@ -38,7 +40,7 @@ export function setupWebSocket(server: Server) {
         // Handle disconnection
         ws.on("close", () => {
             if (path === '/work/distribute') {
-                workConnections.delete(ws);
+                workConnections.delete({ socket: ws, macId });
                 console.log(`Work client disconnected. Total work connections: ${workConnections.size}`);
                 broadcastWorkCount();
             } else if (path === '/stats') {

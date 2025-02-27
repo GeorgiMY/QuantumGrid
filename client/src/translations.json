@@ -49,7 +49,8 @@
         "typeOfDataDistributed": "Type of Data Distributed",
         "localJsonPath": "Local JSON Path",
         "mongodbCollectionName": "MongoDB Collection Name",
-        "typeOfDataDeposition": "Type of Data Deposition"
+        "typeOfDataDeposition": "Type of Data Deposition",
+        "chooseFile": "Choose a file"
     },
     "bg": {
         "createServer": "Създаване на сървър",
@@ -101,7 +102,8 @@
         "typeOfDataDistributed": "Тип на разпределените данни",
         "localJsonPath": "Локален JSON път",
         "mongodbCollectionName": "Име на MongoDB колекция",
-        "typeOfDataDeposition": "Тип на депозиране на данни"
+        "typeOfDataDeposition": "Тип на депозиране на данни",
+        "chooseFile": "Изберете файл"
     },
     "zh": {
         "createServer": "创建服务器",
@@ -153,7 +155,8 @@
         "typeOfDataDistributed": "分发的数据类型",
         "localJsonPath": "本地JSON路径",
         "mongodbCollectionName": "MongoDB集合名称",
-        "typeOfDataDeposition": "数据存放类型"
+        "typeOfDataDeposition": "数据存放类型",
+        "chooseFile": "选择文件"
     },
     "pt": {
         "createServer": "Criar Servidor",
@@ -205,7 +208,8 @@
         "typeOfDataDistributed": "Tipo de Dados Distribuídos",
         "localJsonPath": "Caminho Local do JSON",
         "mongodbCollectionName": "Nome da Coleção MongoDB",
-        "typeOfDataDeposition": "Tipo de Deposição de Dados"
+        "typeOfDataDeposition": "Tipo de Deposição de Dados",
+        "chooseFile": "Escolher um arquivo"
     },
     "pt-br": {
         "createServer": "Criar Servidor",
@@ -257,7 +261,8 @@
         "typeOfDataDistributed": "Tipo de Dados Distribuídos",
         "localJsonPath": "Caminho Local do JSON",
         "mongodbCollectionName": "Nome da Coleção MongoDB",
-        "typeOfDataDeposition": "Tipo de Deposição de Dados"
+        "typeOfDataDeposition": "Tipo de Deposição de Dados",
+        "chooseFile": "Escolher um arquivo"
     },
     "es": {
         "createServer": "Crear Servidor",
@@ -309,7 +314,8 @@
         "typeOfDataDistributed": "Tipo de Datos Distribuidos",
         "localJsonPath": "Ruta Local de JSON",
         "mongodbCollectionName": "Nombre de la Colección MongoDB",
-        "typeOfDataDeposition": "Tipo de Depósito de Datos"
+        "typeOfDataDeposition": "Tipo de Depósito de Datos",
+        "chooseFile": "Elegir un archivo"
     },
     "ja": {
         "createServer": "サーバーを作成",
@@ -361,6 +367,7 @@
         "typeOfDataDistributed": "配布されたデータの種類",
         "localJsonPath": "ローカルJSONパス",
         "mongodbCollectionName": "MongoDBコレクション名",
-        "typeOfDataDeposition": "データの預け入れの種類"
+        "typeOfDataDeposition": "データの預け入れの種類",
+        "chooseFile": "ファイルを選択"
     }
 }

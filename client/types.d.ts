@@ -74,15 +74,19 @@ type Translation = {
     localJsonPath: string;
     mongodbCollectionName: string;
     typeOfDataDeposition: string;
+    chooseFile: string;
 }
 
 type UnsubscribeFunction = () => void;
 
 type EventPayloadMapping = {
+
 }
 
 interface Window {
     electron: {
-
+        saveJSON,
+        openDialog,
+        responseOpenDialog
     }
 }

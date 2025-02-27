@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { insertNewDocument, insertNewDocuments } from './utils/mongoDBFunctions';
+import { insertNewDocument, insertNewDocuments } from './mongoDBFunctions';
 import { readFileSync } from 'fs';
 
 // Saves a JSON object in a new file in /data/processed
