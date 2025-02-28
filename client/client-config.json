@@ -1,7 +1,3 @@
 {
-    "distribution-preferences": {
-        "ram": 75,
-        "cpu": 25
-    },
-    "url": "https://www.google.com"
+    "data-deposition": "./data/unprocessed"
 }

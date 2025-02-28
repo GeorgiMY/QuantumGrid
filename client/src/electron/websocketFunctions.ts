@@ -1,29 +1,31 @@
 import { saveJSONFileLocally } from "./receiveData.js";
 // import { startSendingDataPeriodically } from "./cronJobs.js";
+import { getMacAddress } from "./specs.js";
+import WebSocket from "ws";
 
 // Declare a variable to hold the WebSocket instance
 let ws: WebSocket | null = null;
 
 // Connect to the websocket server
 export async function connectToServer(serverURL: string) {
-    ws = new window.WebSocket(serverURL);
+    const macId = await getMacAddress();
+    console.log(macId);
+    ws = new WebSocket(`${serverURL}?macid=${macId}`);
     // let cronJob: ReturnType<typeof startSendingDataPeriodically>;
 
     ws.onopen = () => {
         console.log('Connected to the server');
         if (ws) {
             // cronJob = startSendingDataPeriodically(5, ws);
-            ws.send('Hello server!');
         } else {
             console.error("WebSocket is not connected.");
         }
     };
 
-    ws.onmessage = async (event: MessageEvent) => {
-        const receivedData = JSON.parse(event.data);
+    ws.onmessage = async (event: WebSocket.MessageEvent) => {
+        const receivedData = JSON.parse(event.data.toString());
         console.log(`Received data from server: ${receivedData}`);
-        await saveJSONFileLocally(receivedData, Date.now().toString());
-        console.log("Data is saved");
+        await saveJSONFileLocally(receivedData, `${Date.now().toString()}.json`);
     };
 
     ws.onerror = (error) => {

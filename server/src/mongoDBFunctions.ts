@@ -29,7 +29,7 @@ async function findDocument(collectionName: string, query: Record<string, any>) 
 }
 
 // Find documents from a collection
-export async function findDocuments(collectionName: string, start: number, end: number) {
+export async function findDocuments(collectionName: string, start: number, end: number): Promise<mongoose.mongo.WithId<mongoose.AnyObject>[]> {
     await connectToMongoDb();
 
     const collection = mongoose.connection.collection(collectionName);

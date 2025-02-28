@@ -10,12 +10,28 @@ export async function readDataFromMongoDB() {
     const data = JSON.parse(readFileSync(configPath, 'utf-8'));
     const collectionName: string = data["mongodb-collection-name"];
 
-    const allSentOutIds = getAllObjectIds();
+    // To store unique docs
+    let uniqueDocs: Set<any> = new Set();
+    let currentIndex = 1;
+    let incrementingIndex = 10;
 
-    const documents = findDocuments(collectionName, currentIndex, incrementingIndex)
+    // // Repeat until we have 10 unique IDs
+    while (uniqueDocs.size < 10) {
+        const allSentOutIds = getAllObjectIds();
+        const documents = await findDocuments(collectionName, currentIndex, incrementingIndex + 1);
 
-    if (!documents) throw new Error("Couldn't find documents");
-    else return documents;
+        documents.forEach((doc: any) => {
+            if (!allSentOutIds.includes(doc._id)) uniqueDocs.add(doc);
+        });
+
+        // Move to the next set of documents
+        currentIndex += incrementingIndex;
+
+        if (documents.length < incrementingIndex) break; // Break if no more documents are found
+    }
+
+    // Return the first 10 unique docs
+    return uniqueDocs;
 }
 
 // Read data from a local JSON file line by line (depricated)

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Loader2, AlertCircle, CheckCircle2, XCircle } from "lucide-react"
-import { connectToServer, disconnectFromServer } from "../electron/websocketFunctions"
+// import { connectToServer, disconnectFromServer } from "../electron/websocketFunctions"
 import { useLanguage } from "./LanguageContext"
 
 export function ConnectServer() {
@@ -22,11 +22,12 @@ export function ConnectServer() {
 
         setIsLoading(true)
         try {
-            await connectToServer(`ws://${serverURL}`)
+            window.electron.startWebsocketConnection(serverURL);
             setIsConnected(true)
             setConnectionStatus(translations.statusJustConnected)
         } catch (error) {
             console.error("Connection error:", error)
+            setIsConnected(false)
             setConnectionStatus(translations.statusFailedConnecting)
         } finally {
             setIsLoading(false)
@@ -34,7 +35,7 @@ export function ConnectServer() {
     }
 
     const handleDisconnect = () => {
-        disconnectFromServer()
+        window.electron.disconnectFromServer();
         setIsConnected(false)
         setConnectionStatus(translations.disconnectFromServer)
     }

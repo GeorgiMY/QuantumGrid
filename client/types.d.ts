@@ -87,6 +87,8 @@ interface Window {
     electron: {
         saveJSON,
         openDialog,
-        responseOpenDialog
+        responseOpenDialog,
+        startWebsocketConnection,
+        disconnectFromServer
     }
 }

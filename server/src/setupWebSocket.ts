@@ -9,14 +9,25 @@ export function setupWebSocket(server: Server) {
 
     wss.on("connection", async (ws: WebSocket, req: Request) => {
         const path = req.url;
-        const { macId }: { macId: string } = await req.json();
+
+        // Extract the MAC ID from the query parameters
+        const macId = path.split('=')[1];
+
         console.log(`New connection attempt to path: ${path} from device with MAC id: ${macId}`);
 
-        if (path === '/work/distribute') {
-            workConnections.add({ socket: ws, macId });
-            log(`Client from device with MAC id: ${macId} connected. Total work connections: ${workConnections.size}`);
-            broadcastWorkCount();
-        } else if (path === '/stats') {
+        const connectionPath = path.split('?')[0];
+
+        if (connectionPath === '/work/distribute') {
+            if (macId) {
+                workConnections.add({ socket: ws, macId });
+                log(`Client from device with MAC id: ${macId} connected. Total work connections: ${workConnections.size}`);
+                broadcastWorkCount();
+            } else {
+                console.error("MAC ID not provided.");
+                ws.close();
+                return;
+            }
+        } else if (connectionPath === '/stats') {
             statsClients.add(ws);
             console.log(`Stats client connected. Total stats clients: ${statsClients.size}`);
             // Send initial work count to new stats client
@@ -40,9 +51,14 @@ export function setupWebSocket(server: Server) {
         // Handle disconnection
         ws.on("close", () => {
             if (path === '/work/distribute') {
-                workConnections.delete({ socket: ws, macId });
-                console.log(`Work client disconnected. Total work connections: ${workConnections.size}`);
-                broadcastWorkCount();
+                // Find and delete the connection with the same socket
+                workConnections.forEach((connection) => {
+                    if (connection.socket === ws) {
+                        workConnections.delete(connection);
+                        console.log(`Work client disconnected. Total work connections: ${workConnections.size}`);
+                        broadcastWorkCount();
+                    }
+                });
             } else if (path === '/stats') {
                 statsClients.delete(ws);
             }
