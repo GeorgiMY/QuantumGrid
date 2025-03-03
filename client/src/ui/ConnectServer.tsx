@@ -11,7 +11,7 @@ export function ConnectServer() {
     const [connectionStatus, setConnectionStatus] = useState<string | null>(null)
     const [isConnected, setIsConnected] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [serverURL, setServerURL] = useState("localhost:3000/work/distribute")
+    const [serverURL, setServerURL] = useState("localhost:3000")
     const { translations } = useLanguage();
 
     const handleConnect = async () => {

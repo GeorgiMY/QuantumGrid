@@ -48,6 +48,7 @@ const distributionOptions = [
 export function CreateServer() {
     const { translations } = useLanguage()
     const [formData, setFormData] = useState<FormData>(initialFormData)
+    const [pathToServer, setPathToServer] = useState<string>("/")
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target
@@ -66,14 +67,41 @@ export function CreateServer() {
         e.preventDefault()
         try {
             console.log("Form Data Submitted:", formData)
-            // Add your form submission logic here
+
         } catch (error) {
             console.error("Error submitting form:", error)
         }
     }
 
+    const handleSetupServer = async () => {
+        try {
+            const path = await window.electron.setupServer();
+            setPathToServer(path);
+        } catch (error) {
+            console.error("Error in handleSetupServer: ", error);
+        }
+    }
+
+    const redirectToServerCreation = () => {
+        // redirect()
+    }
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+            <ul>
+                <li>
+                    1. Download server from here:
+                    <a href="https://github.com/GeorgiMY/QuantumGrid/releases" >GitHub Releases</a>
+                </li>
+                <li>
+                    2. Choose where you've saved the server to set it up: <Button onClick={handleSetupServer}>Server Location</Button>
+                    <p>Chosen path: {pathToServer}</p>
+                </li>
+                <li>
+                    <Button onClick={redirectToServerCreation}>Continue</Button>
+                </li>
+            </ul>
+
             <Card className="w-full max-w-3xl">
                 <CardHeader>
                     <CardTitle className="text-2xl font-bold">{translations.createProject}</CardTitle>
@@ -216,13 +244,19 @@ export function CreateServer() {
                     </form>
                 </CardContent>
                 <CardFooter>
-                    <Button type="submit" className="w-full text-base py-5">
+                    <Button type="submit" className="w-full text-base py-5 cursor-pointer">
                         {translations.createProjectButton}
                     </Button>
                 </CardFooter>
             </Card>
         </div>
     )
+
+    // return (
+    //     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+    //         
+    //     </div>
+    // )
 }
 
 export default CreateServer

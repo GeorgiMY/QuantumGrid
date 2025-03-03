@@ -66,7 +66,7 @@ app.get('/work/distribute', async (req: Request, res: Response) => {
 
 // When a device visits this page a websocket connection will try to be established
 // If it is successfully established the device will automatically start receiving work
-app.get('/work/distribute', async (req: Request, res: Response) => {
+app.get('/work', async (req: Request, res: Response) => {
     res.status(200);
 });
 
@@ -78,7 +78,7 @@ app.get('/stats', async (req: Request, res: Response) => {
 
 // When the client visits this page the software will automatically be downloaded
 app.get('/download', async (req: Request, res: Response) => {
-    res.download("../data/download/download.exe");
+    res.download("./data/software/software.exe");
 })
 
 server.listen(PORT, () => {

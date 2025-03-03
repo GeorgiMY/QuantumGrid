@@ -6,6 +6,7 @@ electron.contextBridge.exposeInMainWorld("electron", {
     openDialog: () => ipcRenderer.send("open-dialog"),
     startWebsocketConnection: (serverURL: string) => ipcRenderer.send("start-websocket-connection", serverURL),
     disconnectFromServer: () => ipcRenderer.send("disconnect-from-server"),
+    setupServer: (serverLocation: string) => ipcRenderer.invoke("setup-server", serverLocation),
     //backend to frontend
     responseOpenDialog: (callback: any) => ipcRenderer.on("response-open-dialog", (event, { path, data }) => {
         callback({ path, data })

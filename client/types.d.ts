@@ -89,6 +89,7 @@ interface Window {
         openDialog,
         responseOpenDialog,
         startWebsocketConnection,
-        disconnectFromServer
+        disconnectFromServer,
+        setupServer
     }
 }

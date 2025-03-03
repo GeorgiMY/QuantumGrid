@@ -4,3 +4,5 @@ node_modules
 /logs
 records.sqlite
 records.sqlite-journal
+data/unprocessed
+data/processed

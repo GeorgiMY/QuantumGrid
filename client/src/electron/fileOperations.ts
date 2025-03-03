@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog } from "electron/main";
+import { BrowserWindow, dialog, OpenDialogReturnValue } from "electron/main";
 import { log } from "./logging.js";
 import fs from 'fs';
 import fsPromises from 'fs/promises';
@@ -34,4 +34,17 @@ export async function openDialog(mainWindow: BrowserWindow) {
     const jsonData = JSON.parse(fileContent); // Parse the JSON data
 
     return { path: filePath, data: jsonData }; // Return both path and data
+}
+
+
+export async function getServerPath(mainWindow: BrowserWindow): Promise<OpenDialogReturnValue> {
+    const result = await dialog.showOpenDialog(mainWindow, {
+        properties: ['openDirectory']
+    });
+
+    if (result.canceled) {
+        return { canceled: true, filePaths: [] }; // Return null if dialog is canceled
+    }
+
+    return result;
 }

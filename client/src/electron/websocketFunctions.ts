@@ -11,7 +11,7 @@ let ws: WebSocket | null = null;
 export async function connectToServer(serverURL: string) {
     const macId = await getMacAddress();
 
-    ws = new WebSocket(`${serverURL}?macid=${macId}`);
+    ws = new WebSocket(`${serverURL}/work?macid=${macId}`);
     let cronJob: ScheduledTask;
 
     ws.onopen = () => {

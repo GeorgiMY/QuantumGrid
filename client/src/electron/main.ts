@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron"
 import { isDev } from "./util.js";
 import { getPreloadPath, getUIPath } from "./pathResolver.js";
-import { openDialog, saveJSONToFile } from "./fileOperations.js";
+import { getServerPath, openDialog, saveJSONToFile } from "./fileOperations.js";
 import { connectToServer, disconnectFromServer } from "./websocketFunctions.js";
 
 let mainWindow: BrowserWindow;
@@ -45,4 +45,13 @@ ipcMain.on("start-websocket-connection", async (event, serverURL) => {
 
 ipcMain.on("disconnect-from-server", (event) => {
     disconnectFromServer();
+})
+
+ipcMain.handle("setup-server", async (event) => {
+    try {
+        const result = await getServerPath(mainWindow);
+        return result.filePaths[0];
+    } catch (error) {
+        console.error("Error opening file explorer: ", error)
+    }
 })
