@@ -67,19 +67,17 @@ export function startSendingDataPeriodically(period: number): cron.ScheduledTask
 
 async function sendLocalData() {
     if (workConnections.size <= 0) return;
-
-    console.log("local data is being sent");
+    console.log("Data is being sent");
 
     workConnections.forEach(async (client) => {
         const dataToSend = await readDataFromMongoDB();
         if (client.socket.readyState) {
             try {
-                console.log([...dataToSend]);
                 client.socket.send(JSON.stringify([...dataToSend]));
                 console.log("Data sent to client");
 
                 dataToSend.forEach((data) => {
-                    // addRecord(data._id, client.macId);
+                    addRecord(data._id.toString(), client.macId);
                 });
             } catch (error) {
                 console.error("Error sending data to client:", error);

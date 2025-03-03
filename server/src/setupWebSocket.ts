@@ -13,9 +13,9 @@ export function setupWebSocket(server: Server) {
         // Extract the MAC ID from the query parameters
         const macId = path.split('=')[1];
 
-        console.log(`New connection attempt to path: ${path} from device with MAC id: ${macId}`);
-
         const connectionPath = path.split('?')[0];
+
+        console.log(`New connection attempt to path: ${connectionPath} from device with MAC id: ${macId}`);
 
         if (connectionPath === '/work/distribute') {
             if (macId) {
@@ -33,7 +33,7 @@ export function setupWebSocket(server: Server) {
             // Send initial work count to new stats client
             sendWorkCount(ws);
         } else {
-            console.log(`Invalid path: ${path}`);
+            console.log(`Invalid path: ${connectionPath}`);
             ws.close();
             return;
         }
@@ -50,16 +50,16 @@ export function setupWebSocket(server: Server) {
 
         // Handle disconnection
         ws.on("close", () => {
-            if (path === '/work/distribute') {
+            if (connectionPath === '/work/distribute') {
                 // Find and delete the connection with the same socket
                 workConnections.forEach((connection) => {
-                    if (connection.socket === ws) {
+                    if (connection.socket == ws) {
                         workConnections.delete(connection);
                         console.log(`Work client disconnected. Total work connections: ${workConnections.size}`);
                         broadcastWorkCount();
                     }
                 });
-            } else if (path === '/stats') {
+            } else if (connectionPath === '/stats') {
                 statsClients.delete(ws);
             }
         });

@@ -1,4 +1,4 @@
-import { createReadStream, readFileSync } from "fs";
+import { createReadStream, readFileSync, writeFileSync, existsSync } from "fs";
 import readline from "readline"
 import { findDocuments } from "./mongoDBFunctions";
 import path from "path";
@@ -10,29 +10,68 @@ export async function readDataFromMongoDB() {
     const data = JSON.parse(readFileSync(configPath, 'utf-8'));
     const collectionName: string = data["mongodb-collection-name"];
 
-    // To store unique docs
-    let uniqueDocs: Set<any> = new Set();
-    let currentIndex = 1;
-    let incrementingIndex = 10;
+    // To store unique docs - changed from Set to Array
+    let uniqueDocs: any[] = [];
+    let currentIndex = 0;
+    const incrementingIndex = 10;
 
-    // // Repeat until we have 10 unique IDs
-    while (uniqueDocs.size < 10) {
-        const allSentOutIds = getAllObjectIds();
-        const documents = await findDocuments(collectionName, currentIndex, incrementingIndex + 1);
+    const allSentOutIds = getAllObjectIds();
 
-        documents.forEach((doc: any) => {
-            if (!allSentOutIds.includes(doc._id)) uniqueDocs.add(doc);
-        });
+    // Repeat until we have 10 unique IDs
+    while (uniqueDocs.length < 10) {
+        const documents = await findDocuments(collectionName, currentIndex, incrementingIndex);
+
+        // Break if no more documents are found
+        if (documents.length === 0) break;
+
+        for (const doc of documents) {
+            // Check if this doc has already been sent
+            if (!allSentOutIds.includes(doc._id.toString())) {
+                uniqueDocs.push(doc);
+
+                // Break once we reach 10 unique docs
+                if (uniqueDocs.length >= 10) break;
+            }
+        }
 
         // Move to the next set of documents
         currentIndex += incrementingIndex;
-
-        if (documents.length < incrementingIndex) break; // Break if no more documents are found
     }
 
-    // Return the first 10 unique docs
+    console.log(`Found ${uniqueDocs.length} unique documents`);
     return uniqueDocs;
 }
+
+// export async function readDataFromMongoDB() {
+//     const configPath = path.resolve(__dirname, '../server-config.json');
+//     const data = JSON.parse(readFileSync(configPath, 'utf-8'));
+//     const collectionName: string = data["mongodb-collection-name"];
+
+//     const uniqueIds = new Set<string>();
+//     const uniqueDocs: any[] = [];
+//     const batchSize = 100; // Pull 100 documents at once
+//     let currentIndex = 0; // Start from 0
+
+//     while (uniqueDocs.length < 10) {
+//         const allSentOutIds = getAllObjectIds();
+//         const documents = await findDocuments(collectionName, currentIndex, batchSize);
+
+//         for (const doc of documents) {
+//             const docId = doc._id.toString();
+//             if (!allSentOutIds.includes(docId) && !uniqueIds.has(docId)) {
+//                 uniqueIds.add(docId);
+//                 uniqueDocs.push(doc);
+//             }
+//             if (uniqueDocs.length === 10) break;
+//         }
+
+//         currentIndex += batchSize;
+//         if (documents.length < batchSize) break; // No more documents
+//     }
+
+//     console.log(uniqueDocs);
+//     return uniqueDocs;
+// }
 
 // Read data from a local JSON file line by line (depricated)
 export async function readDataLinesFromJson(pathToJSON: string, startLine: number, endLine: number): Promise<string[]> {

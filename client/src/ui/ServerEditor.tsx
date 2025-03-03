@@ -5,7 +5,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Alert } from "@/components/ui/alert";
 import { useLanguage } from './LanguageContext';
-import { saveJSONToFile } from "../electron/fileOperations"
 
 interface ConfigData {
     "volunteer-project": boolean;

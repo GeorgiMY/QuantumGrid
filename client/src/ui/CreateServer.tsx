@@ -112,7 +112,7 @@ export function CreateServer() {
 
                         <div className="space-y-2">
                             <Label htmlFor="data-type" className="text-sm font-medium">
-                                {translations.dataTypeLabel}
+                                {/* {translations.dataTypeLabel} */}
                             </Label>
                             <Select
                                 name="dataType"

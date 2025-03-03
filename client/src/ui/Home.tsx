@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+// import { Button } from "@/components/ui/button"
 import { useLanguage } from '../ui/LanguageContext';
 
 export function Home() {
@@ -14,9 +14,9 @@ export function Home() {
                     {translations.homeDescription}
                 </p>
                 {/* <div className="flex justify-center space-x-4">
-                    <Button size="lg">Get Started</Button>
+                    <a href="https://quantumgrid.info" target="_blank" rel="noopener noreferrer" className="cursor-pointer">{translations.learnMore}</a>
                     <Button size="lg" variant="outline">
-                        Learn More
+                        {translations.getStarted}
                     </Button>
                 </div> */}
             </div>

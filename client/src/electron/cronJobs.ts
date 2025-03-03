@@ -1,6 +1,7 @@
 import cron from "node-cron";
 import fs from 'fs/promises';
 import path from 'path';
+import WebSocket from "ws";
 
 // Declare global variables to hold file pathss and sizes
 let currentFileData: { path: string; size: number }[] = [];

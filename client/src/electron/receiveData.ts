@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import { log } from './logging.js';
 
-// Saves a JSON object in a new file in /data/processed
-export async function saveJSONFileLocally(data: any, filename: string): Promise<void> {
-    const dir = path.resolve('./data/processed');
+// Saves a JSON object in a new file in /data/unprocessed
+export function saveJSONFileLocally(data: any, filename: string): void {
+    const dir = path.resolve('./data/unprocessed');
 
     // Ensure the directory exists
     if (!fs.existsSync(dir)) {
@@ -11,9 +12,8 @@ export async function saveJSONFileLocally(data: any, filename: string): Promise<
     }
 
     const filePath = path.join(dir, filename);
-    console.log(filePath);
 
     // Write the JSON data to the file
     fs.writeFileSync(filePath, JSON.stringify(data), 'utf-8');
-    console.log(`JSON data saved to ${filePath}`);
+    log(`JSON data saved to ${filePath}`);
 }

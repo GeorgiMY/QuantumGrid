@@ -1,5 +1,5 @@
 // Header.tsx
-import { PlusCircle, Network, Cpu, ChevronDown } from "lucide-react";
+import { PlusCircle, Network, ChevronDown } from "lucide-react";
 import { useLanguage } from '../ui/LanguageContext';
 import type { LanguageCode } from '../ui/LanguageContext';
 import { useState } from "react";

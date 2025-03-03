@@ -20,17 +20,17 @@ QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets yo
    - Linux
 1. In the **Create Server** tab, customize your server according to the information you'll be distributing.
 1. After creating your server, you'll be redirected to a folder where the express server is stored.
-1. Place your information in the **"data"** folder.
+1. Place your information in the **"data"** folder or on MongoDB.
 1. Your server is now ready. There are two ways to run it:
    - **Cloud**: You can host your server on a VPS (Virtual Private Server). Each VPS has its own setup instructions. Hosting on a VPS ensures 24/7 operation.
    - **Locally**: You can host the server on your own computer. The server will run as long as your computer is running.
 1. You can check all activities and logs in the **"logs"** folder.
 
 ### On data distribution choice
-1. MongoDB - In the "model" folder under "/server/src/model" you'll have to define a schema which will define what is being distributed
+1. MongoDB
 1. SQL
 1. (local) JSON
-1. (local) Images
+1. (local) Files
 
 ### Connecting to the Server
 1. Download the Quantum Grid software:
@@ -38,7 +38,7 @@ QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets yo
    - Mac
    - Linux
 1. In the **Connect** tab, enter the base URL of the server you want to contribute to:
-   - Example: https://volunteerproject.com
+   - Example: https://volunteerproject.com/work/distribute
 1. By default, Quantum Grid will use all your resources, but you can modify this in the **Specifications** page.
 1. That’s it! You’re now actively contributing to the project until you stop or there’s no data available for processing.
 
@@ -50,44 +50,49 @@ QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets yo
 
 #### When You're Connecting to a Server - Your device tries to establish a websocket connection with the server
 
-# <a name="bulgarian"></a>КВАНТОВ ГРИД
+## <a name="bulgarian">Какво е Квантов Грид?</a>
+Квантов Грид е рамка за разпределени изчисления. Софтуерът на Квантов Грид ви позволява да създадете сървър, който разпределя данни към устройство, както и софтуер за обработка на тези данни. Софтуерът на Квантов Грид също така позволява на устройства да се свързват със специфичен сървър, към който искат да се присъединят, като автоматично започват да използват изчислителната си мощност, за да допринасят за обработката на данните.
 
-## Рамка за доброволческо изчисление
+### Работи с:
+1. MongoDB
+2. Локален JSON
 
-### СЪРВЪРЪТ
-
-#### Създаване на сървър
-1. Изтеглете софтуера Quantum Grid
+### Създаване на сървър
+1. Изтеглете софтуера на Квантов Грид:
    - PC
    - Mac
    - Linux
-1. В раздела за създаване на сървър персонализирайте сървъра според информацията, която ще разпространявате.
-1. След създаването на сървъра ще бъдете пренасочени към папка, в която е запазен express сървърът.
-1. Можете да поставите информацията в папката **"data"**.
-1. Сега вашият сървър е готов и остава само да го стартирате. Има два начина да го направите:
-   - **Облачно** - Можете да хоствате сървъра си на VPS (Виртуален частен сървър). Всеки VPS има различни начини за настройка. Така разпространението ще се случва 24/7.
-   - **Локално** - Можете да хоствате сървъра на вашия компютър. Докато компютърът ви работи, сървърът също ще работи.
-1. Можете да проверите всичко, което се случва и е станало от началото на операцията, в папката **"logs"**.
+2. В раздела **Създай Сървър** персонализирайте сървъра според информацията, която ще разпространявате.
+3. След създаването на сървъра ще бъдете пренасочени към папка, където се съхранява express сървърът.
+4. Поставете вашата информация в папката **"data"** или в MongoDB.
+5. Вашият сървър вече е готов. Има два начина да го стартирате:
+   - **В облак (Cloud)**: Можете да хоствате сървъра на VPS (Виртуален Частен Сървър). Всеки VPS има свои собствени инструкции за настройка. Хостването на VPS гарантира 24/7 работа.
+   - **Локално**: Можете да хоствате сървъра на собствения си компютър. Сървърът ще работи, докато компютърът ви е включен.
+6. Можете да проверите всички дейности и логове в папката **"logs"**.
 
-#### Свързване със сървър
-1. Изтеглете софтуера Quantum Grid
+### Избор на разпределение на данни
+1. MongoDB
+2. SQL
+3. (локален) JSON
+4. (локални) файлове
+
+### Свързване със сървъра
+1. Изтеглете софтуера на Квантов Грид:
    - PC
    - Mac
-1. В раздела за свързване въведете базовия URL адрес на уебсайта, към който искате да допринесете.
-   - Пример: https://volunteerproject.com
-1. По подразбиране Quantum Grid ще използва всички ваши ресурси, но можете да промените това на страницата **Specifications**.
-1. Това е всичко! Вече активно допринасяте за проекта, докато не спрете или няма налични данни за обработка.
+   - Linux
+2. В раздела **Connect** въведете базовия URL на сървъра, към който искате да допринесете:
+   - Пример: https://volunteerproject.com/work/distribute
+3. По подразбиране Квантов Грид ще използва всички ваши ресурси, но можете да ги промените на страницата **Specifications**.
+4. Това е всичко! Вече активно допринасяте към проекта, докато не спрете или няма налични данни за обработка.
 
 ---
 
-### КАКВО СЕ СЛУЧВА ЗАД КУЛИСИТЕ
+### Какво се случва под капака
 
-#### Когато създавате сървър:
-1. Настройва се продукционно готов express.js сървър.
-1. Когато получите POST API заявка, се изпълнява проверка, за да се установи дали устройството вече е получило задачи.
+#### Когато създавате сървър - Създава се готов за продукция Express.js сървър.
 
-#### Когато се свързвате със сървър:
-1. На всеки 5 секунди изпращате POST заявка, която споделя вашия прогрес, вашите спецификации и информация за потребителя.
+#### Когато се свързвате със сървър - Вашето устройство се опитва да установи websocket връзка със сървъра.
 
 ## <a name="portuguese-br"></a>Framework de Computação Voluntária
 
