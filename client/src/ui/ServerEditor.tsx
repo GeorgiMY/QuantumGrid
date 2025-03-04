@@ -13,6 +13,8 @@ interface ConfigData {
     "local-json-path": string;
     "mongodb-collection-name": string;
     "type-of-data-deposition": string;
+    "server-name": string;
+    "server-description": string;
 }
 
 const ServerEditor: React.FC = () => {
@@ -29,6 +31,8 @@ const ServerEditor: React.FC = () => {
         "local-json-path": translations.localJsonPath,
         "mongodb-collection-name": translations.mongodbCollectionName,
         "type-of-data-deposition": translations.typeOfDataDeposition,
+        "server-name": "Име на сървър",
+        "server-description": "Описание на сървър",
     };
 
     function handleFileChange() {

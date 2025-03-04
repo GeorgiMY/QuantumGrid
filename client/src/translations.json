@@ -5,11 +5,11 @@
         "createServer": "Create Server",
         "connectServer": "Connect to Server",
         "computerSpecs": "Computer Specs",
-        "createServerTitle": "Create Volunteer Server",
-        "createServerDesc": "Here you can set up and manage your volunteer computing project. Configure your server settings, define tasks, and monitor project progress.",
+        "createServerTitle": "Create Distributed Computing Project",
+        "createServerDesc": "Here you can set up and manage your distributed computing project. Configure your server settings, define tasks, and monitor project progress.",
         "connectServerTitle": "Connect to Server",
-        "connectServerDesc": "Join existing volunteer computing projects. Enter server details, choose projects to contribute to, and start sharing your computer's resources.",
-        "createProject": "Create a Volunteer Computing Project",
+        "connectServerDesc": "Join existing Distributed Computing projects. Enter server details, choose projects to contribute to, and start sharing your computer's resources.",
+        "createProject": "Create a Distributed Computing Project",
         "projectName": "Project Name",
         "projectNamePlaceholder": "Enter your project name",
         "projectDescription": "Project Description (Optional)",
@@ -50,18 +50,19 @@
         "localJsonPath": "Local JSON Path",
         "mongodbCollectionName": "MongoDB Collection Name",
         "typeOfDataDeposition": "Type of Data Deposition",
-        "chooseFile": "Choose a file"
+        "chooseFile": "Choose a file",
+        "commingSoon": "Comming Soon"
     },
     "bg": {
         "createServer": "Създаване на сървър",
         "connectServer": "Свързване към сървър",
-        "createServerTitle": "Създаване на доброволчески сървър",
-        "createServerDesc": "Тук можете да настроите и управлявате вашия проект за доброволчески изчисления. Конфигурирайте настройките на сървъра, определете задачи и наблюдавайте напредъка на проекта.",
+        "createServerTitle": "Създаване на сървър",
+        "createServerDesc": "Тук можете да настроите и управлявате вашия проект. Конфигурирайте настройките на сървъра, определете задачи и наблюдавайте напредъка на проекта.",
         "connectServerTitle": "Свързване към сървър",
-        "connectServerDesc": "Присъединете се към съществуващи проекти за доброволчески изчисления. Въведете данни за сървъра, изберете проекти, към които да допринесете, и започнете да споделяте ресурсите на вашия компютър.",
+        "connectServerDesc": "Присъединете се към съществуващи проекти създадени с Квантов Грид. Въведете данни за сървъра, изберете проекти, към които да допринесете, и започнете да споделяте ресурсите на вашия компютър.",
         "title": "Квантов Грид",
         "homeDescription": "Квантов Грид е рамка за разпределени изчисления. Софтуерът на Квантов Грид ви позволява да създадете сървър, който разпределя данни и софтуер за обработка на тези данни. Софтуерът на Квантов Грид също позволява на устройствата да се свързват със специфичния сървър, с който искат да се свържат, което автоматично започва да използва своята изчислителна мощ, за да допринесе за обработката на данни.",
-        "createProject": "Създайте проект за доброволчески изчисления",
+        "createProject": "Създайте проект за разпределени изчисления",
         "projectName": "Име на проекта",
         "projectNamePlaceholder": "Въведете името на проекта",
         "projectDescription": "Описание на проекта (по избор)",
@@ -103,7 +104,8 @@
         "localJsonPath": "Локален JSON път",
         "mongodbCollectionName": "Име на MongoDB колекция",
         "typeOfDataDeposition": "Тип на депозиране на данни",
-        "chooseFile": "Изберете файл"
+        "chooseFile": "Изберете файл",
+        "commingSoon": "Очаквайте скоро"
     },
     "zh": {
         "createServer": "创建服务器",
@@ -156,7 +158,8 @@
         "localJsonPath": "本地JSON路径",
         "mongodbCollectionName": "MongoDB集合名称",
         "typeOfDataDeposition": "数据存放类型",
-        "chooseFile": "选择文件"
+        "chooseFile": "选择文件",
+        "commingSoon": "即将推出"
     },
     "pt": {
         "createServer": "Criar Servidor",
@@ -209,7 +212,8 @@
         "localJsonPath": "Caminho Local do JSON",
         "mongodbCollectionName": "Nome da Coleção MongoDB",
         "typeOfDataDeposition": "Tipo de Deposição de Dados",
-        "chooseFile": "Escolher um arquivo"
+        "chooseFile": "Escolher um arquivo",
+        "commingSoon": "Em breve"
     },
     "pt-br": {
         "createServer": "Criar Servidor",
@@ -262,7 +266,8 @@
         "localJsonPath": "Caminho Local do JSON",
         "mongodbCollectionName": "Nome da Coleção MongoDB",
         "typeOfDataDeposition": "Tipo de Deposição de Dados",
-        "chooseFile": "Escolher um arquivo"
+        "chooseFile": "Escolher um arquivo",
+        "commingSoon": "Em breve"
     },
     "es": {
         "createServer": "Crear Servidor",
@@ -315,7 +320,8 @@
         "localJsonPath": "Ruta Local de JSON",
         "mongodbCollectionName": "Nombre de la Colección MongoDB",
         "typeOfDataDeposition": "Tipo de Depósito de Datos",
-        "chooseFile": "Elegir un archivo"
+        "chooseFile": "Elegir un archivo",
+        "commingSoon": "Próximamente"
     },
     "ja": {
         "createServer": "サーバーを作成",
@@ -368,6 +374,7 @@
         "localJsonPath": "ローカルJSONパス",
         "mongodbCollectionName": "MongoDBコレクション名",
         "typeOfDataDeposition": "データの預け入れの種類",
-        "chooseFile": "ファイルを選択"
+        "chooseFile": "ファイルを選択",
+        "commingSoon": "近日公開"
     }
 }

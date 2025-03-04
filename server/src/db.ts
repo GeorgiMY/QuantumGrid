@@ -2,7 +2,6 @@ import Database from "better-sqlite3";
 
 const recordsDB = new Database("records.sqlite", { verbose: console.log });
 
-// Works with MongoDB, mitigates inserting files into random places
 recordsDB.exec(`
     CREATE TABLE IF NOT EXISTS records (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

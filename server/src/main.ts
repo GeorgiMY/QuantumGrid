@@ -42,10 +42,6 @@ app.post('/network/join', async (req: Request, res: Response) => {
     res.json(info);
 });
 
-app.get('/work', (req: Request, res: Response) => {
-    res.send("Explain what to do")
-});
-
 app.post('/work/recieve', (req: Request, res: Response) => {
     // Recieve the work done by the device
     // run checks to see if the distributed task is done correctly 

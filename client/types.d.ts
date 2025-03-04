@@ -75,6 +75,7 @@ type Translation = {
     mongodbCollectionName: string;
     typeOfDataDeposition: string;
     chooseFile: string;
+    commingSoon: string;
 }
 
 type UnsubscribeFunction = () => void;

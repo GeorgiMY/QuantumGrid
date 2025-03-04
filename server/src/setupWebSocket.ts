@@ -17,7 +17,7 @@ export function setupWebSocket(server: Server) {
 
         console.log(`New connection attempt to path: ${connectionPath} from device with MAC id: ${macId}`);
 
-        if (connectionPath === '/work/distribute') {
+        if (connectionPath === '/work') {
             if (macId) {
                 workConnections.add({ socket: ws, macId });
                 log(`Client from device with MAC id: ${macId} connected. Total work connections: ${workConnections.size}`);
@@ -50,7 +50,7 @@ export function setupWebSocket(server: Server) {
 
         // Handle disconnection
         ws.on("close", () => {
-            if (connectionPath === '/work/distribute') {
+            if (connectionPath === '/work') {
                 // Find and delete the connection with the same socket
                 workConnections.forEach((connection) => {
                     if (connection.socket == ws) {

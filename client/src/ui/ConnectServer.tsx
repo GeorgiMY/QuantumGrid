@@ -70,9 +70,13 @@ export function ConnectServer() {
                                 </Button>
                             )}
                             {isConnected && (
-                                <Button onClick={handleDisconnect} variant="destructive" className="w-full text-lg py-6">
-                                    {translations.disconnectFromServer}
-                                </Button>
+                                <div className="w-full">
+                                    <Button onClick={handleDisconnect} variant="destructive" className="w-full text-lg py-6">
+                                        {translations.disconnectFromServer}
+                                    </Button>
+                                    {/* <p>Download the software for handling this data: {serverURL}/download</p> */}
+                                    <p>Изтеглете софтуер за преработване на тези данни от: {serverURL}/download</p>
+                                </div>
                             )}
                         </div>
                     </div>

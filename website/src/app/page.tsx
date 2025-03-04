@@ -58,7 +58,7 @@ export default function Home() {
                     <Link href="/docs">
                         <Button variant="default">Documentation</Button>
                     </Link>
-                    <Link href="/download">
+                    <Link href="https://github.com/GeorgiMY/QuantumGrid/releases">
                         <Button variant="default">Download</Button>
                     </Link>
                     <Link href="/projects">

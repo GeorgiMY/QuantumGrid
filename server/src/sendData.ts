@@ -1,7 +1,6 @@
 import cron from "node-cron"
 import { workConnections } from './stats';
 import { readDataFromMongoDB } from "./readData";
-import path from 'path';
 import { addRecord } from "./queries";
 
 export function startSendingDataPeriodically(period: number): cron.ScheduledTask {
@@ -12,6 +11,32 @@ export function startSendingDataPeriodically(period: number): cron.ScheduledTask
     });
     cronJob.start();
     return cronJob;
+}
+
+async function sendLocalData() {
+    if (workConnections.size <= 0) return;
+    console.log("Data is being sent");
+
+    for (const client of workConnections.values()) {
+        const dataToSend = await readDataFromMongoDB();
+
+        if (client.socket.readyState) {
+            try {
+                client.socket.send(JSON.stringify([...dataToSend])); // Wait for the socket to send
+                console.log("Data sent to client");
+
+                // Wait for all records to be added before moving to the next client
+                await Promise.all(dataToSend.map((data) =>
+                    addRecord(data._id.toString(), client.macId)
+                ));
+
+            } catch (error) {
+                console.error("Error sending data to client:", error);
+            }
+        } else {
+            console.log("Client not ready, skipping send");
+        }
+    }
 }
 
 // async function getTypeOfDataDistributed(): Promise<"MongoDB" | "Local-JSON" | "Local-Files"> {
@@ -29,61 +54,3 @@ export function startSendingDataPeriodically(period: number): cron.ScheduledTask
 
 //     return typeOfDataDistribution;
 // }
-
-// async function sendDataDependingOnDataDistributed() {
-//     const typeOfDataDistributed = await getTypeOfDataDistributed();
-
-//     switch (typeOfDataDistributed) {
-//         case "MongoDB":
-//             break;
-//         case "Local-JSON":
-//             break;
-//         case "Local-Files":
-//             break;
-//         default:
-//             throw new Error("At sendDataDependingOnDataDistributed() all cases failed. Unknown typeOfDataDistributed was tried");
-//     }
-// }
-
-// async function distributeData() {
-//     const typeOfDataDistribution = await getTypeOfDataDistribution();
-
-//     switch (typeOfDataDistribution) {
-//         case "Equally-Distributed":
-
-//             break;
-//         case "CPU-Intensive":
-//             break;
-//         case "GPU-intensive":
-//             break;
-//         case "Memory-Intensive":
-//             break;
-//         default:
-//             throw new Error("At distributeData() all cases failed. Unknown typeOfDataDistribution was tried");
-//     }
-
-
-// }
-
-async function sendLocalData() {
-    if (workConnections.size <= 0) return;
-    console.log("Data is being sent");
-
-    workConnections.forEach(async (client) => {
-        const dataToSend = await readDataFromMongoDB();
-        if (client.socket.readyState) {
-            try {
-                client.socket.send(JSON.stringify([...dataToSend]));
-                console.log("Data sent to client");
-
-                dataToSend.forEach((data) => {
-                    addRecord(data._id.toString(), client.macId);
-                });
-            } catch (error) {
-                console.error("Error sending data to client:", error);
-            }
-        } else {
-            console.log("Client not ready, skipping send");
-        }
-    });
-}

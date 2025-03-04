@@ -1,4 +1,6 @@
 {
+    "server-name": "name",
+    "server-description": "",
     "volunteer-project": false,
     "type-of-data-distribution": "Equally-Distributed",
     "type-of-data-distributed": "MongoDB",
