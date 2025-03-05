@@ -27,7 +27,7 @@ const Navbar = () => {
                         <Link href="/docs">
                             <Button variant="ghost">Docs</Button>
                         </Link>
-                        <Link href="/download">
+                        <Link href="https://github.com/GeorgiMY/QuantumGrid/releases">
                             <Button variant="ghost">Download</Button>
                         </Link>
                         <Link href="/projects">

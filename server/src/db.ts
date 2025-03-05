@@ -1,6 +1,6 @@
 import Database from "better-sqlite3";
 
-const recordsDB = new Database("records.sqlite", { verbose: console.log });
+const recordsDB = new Database("records.sqlite");
 
 recordsDB.exec(`
     CREATE TABLE IF NOT EXISTS records (

@@ -306,17 +306,21 @@ export function CreateServer() {
                     </CardFooter>
                 </Card>
             ) : (
-                <ul>
-                    <li>
-                        1. Download server from here:
-                        <a href="https://github.com/GeorgiMY/QuantumGrid/releases" >GitHub Releases</a>
+                <ul className="text-2xl items-center">
+                    <li className="mb-4">
+                        {/* 1. Download server from here: */}
+                        1. Изтегли сървър от тук:
+                        <a href="https://github.com/GeorgiMY/QuantumGrid/releases" > GitHub Releases</a>
                     </li>
-                    <li>
-                        2. Choose where you've saved the server to set it up: <Button onClick={handleSetupServer}>Server Location</Button>
-                        <p>Chosen path: {pathToServer}</p>
+                    <li className="mb-4" >
+                        {/* 2. Choose where you've saved the server to set it up: <Button onClick={handleSetupServer}>Server Location</Button> */}
+                        2. Избери пътеката, където е съхранен съврърът <Button onClick={handleSetupServer}> Server Location</Button>
+                        {/* <p>Chosen path: {pathToServer}</p> */}
+                        <p>Избран път: <code>{pathToServer}</code></p>
                     </li>
-                    <li>
-                        <Button onClick={startServerConfiguring}>Configure Server</Button>
+                    <li className="mb-4" >
+                        {/* <Button onClick={startServerConfiguring}>Configure Server</Button> */}
+                        <Button onClick={startServerConfiguring}>Конфигурирай Сървър</Button>
                     </li>
                 </ul>
             )}
