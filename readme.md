@@ -2,7 +2,7 @@
 
 <h3 align=center>
 
-| [ENGLISH](#english) | [BULGARIAN](#bulgarian) | [PORTUGUÊS-BR](#portuguese-br) | [中文](#mandarin) | [ESPAÑOL](#spanish) | [हिंदी](#hindi) | [РУССКИЙ](#russian) |
+| [ENGLISH](#english) | [БЪЛГАРСКИ](#bulgarian) | [PORTUGUÊS-BR](#portuguese-br) | [中文](#mandarin) | [ESPAÑOL](#spanish) | [हिंदी](#hindi) | [РУССКИЙ](#russian) |
 
 </h3>
 
