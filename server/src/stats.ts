@@ -11,6 +11,7 @@ export const sendWorkCount = (client: WebSocket) => {
         count: workConnections.size,
         // Optionally include MAC IDs if needed
         macIds: Array.from(workConnections).map(conn => conn.macId)
+
     };
     client.send(JSON.stringify(data));
 };

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            border: 2px solid black;
+        }
+
+        .content {
+            width: 80%;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f3f3f3;
+            font-weight: bold;
+        }
+
+        .worker-count {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <%- include('partials/sidebar') %>
+            <div class="content">
+                <h1>Total Workers: <span class="worker-count" id="work-count">0</span></h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Num</th>
+                            <th>Mac id</th>
+                            <th>Work Done</th>
+                        </tr>
+                    </thead>
+                    <tbody id="worker-list">
+                        <!-- Workers will be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    <script>
+        const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/stats`);
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            if (data.type === "workCount") {
+                document.getElementById("work-count").textContent = data.count;
+            }
+        };
+
+        ws.onerror = (error) => console.error("WebSocket error:", error);
+        ws.onclose = () => console.log("WebSocket connection closed");
+    </script>
+
+</body>
+
+</html>
