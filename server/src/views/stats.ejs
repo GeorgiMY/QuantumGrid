@@ -87,11 +87,29 @@
             const data = JSON.parse(event.data);
             if (data.type === "workCount") {
                 document.getElementById("work-count").textContent = data.count;
+                const list = document.getElementById("worker-list");
+                list.innerHTML = "";
+                let index = 1
+                data.macIds.forEach((macId) => {
+                    const row = `<tr>
+                        <td>${index}</td>
+                        <td>${macId}</td>
+                        <td>0</td>
+                        </tr>`;
+                    console.log(macId)
+                    list.innerHTML += row;
+                    index++;
+                });
             }
         };
 
-        ws.onerror = (error) => console.error("WebSocket error:", error);
-        ws.onclose = () => console.log("WebSocket connection closed");
+        ws.onerror = (error) => {
+            console.error("WebSocket error:", error);
+        };
+
+        ws.onclose = () => {
+            console.log("WebSocket connection closed");
+        };
     </script>
 
 </body>

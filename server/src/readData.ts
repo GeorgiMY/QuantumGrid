@@ -1,8 +1,8 @@
-import { createReadStream, readFileSync, writeFileSync, existsSync } from "fs";
+import { createReadStream, readFileSync } from "fs";
 import readline from "readline"
 import { findDocuments } from "./mongoDBFunctions";
 import path from "path";
-import { getAllObjectIds } from "./queries";
+import { getAllObjectIds, getCurrentIndex, updateCurrentIndex } from "./queries";
 
 // Gets a specific number of documents from a collection specified in the project-config.json
 export async function readDataFromMongoDB() {
@@ -11,8 +11,8 @@ export async function readDataFromMongoDB() {
     const collectionName: string = data["mongodb-collection-name"];
 
     let uniqueDocs: any[] = [];
-    let currentIndex = 0;
-    const batchSize = 10;
+    const batchSize = 50;
+    let currentIndex = getCurrentIndex();
 
     const allSentOutIds = getAllObjectIds();
     const allSentOutIdsSet = new Set(allSentOutIds);
@@ -28,44 +28,13 @@ export async function readDataFromMongoDB() {
             }
 
             currentIndex++;
+            updateCurrentIndex(currentIndex);
             if (uniqueDocs.length >= batchSize) break;
         }
     }
 
-    console.log(`Found ${uniqueDocs.length} unique documents`);
     return uniqueDocs;
 }
-
-// export async function readDataFromMongoDB() {
-//     const configPath = path.resolve(__dirname, '../server-config.json');
-//     const data = JSON.parse(readFileSync(configPath, 'utf-8'));
-//     const collectionName: string = data["mongodb-collection-name"];
-
-//     const uniqueIds = new Set<string>();
-//     const uniqueDocs: any[] = [];
-//     const batchSize = 100; // Pull 100 documents at once
-//     let currentIndex = 0; // Start from 0
-
-//     while (uniqueDocs.length < 10) {
-//         const allSentOutIds = getAllObjectIds();
-//         const documents = await findDocuments(collectionName, currentIndex, batchSize);
-
-//         for (const doc of documents) {
-//             const docId = doc._id.toString();
-//             if (!allSentOutIds.includes(docId) && !uniqueIds.has(docId)) {
-//                 uniqueIds.add(docId);
-//                 uniqueDocs.push(doc);
-//             }
-//             if (uniqueDocs.length === 10) break;
-//         }
-
-//         currentIndex += batchSize;
-//         if (documents.length < batchSize) break; // No more documents
-//     }
-
-//     console.log(uniqueDocs);
-//     return uniqueDocs;
-// }
 
 // Read data from a local JSON file line by line (depricated)
 export async function readDataLinesFromJson(pathToJSON: string, startLine: number, endLine: number): Promise<string[]> {

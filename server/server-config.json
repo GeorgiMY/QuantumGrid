@@ -6,5 +6,6 @@
     "type-of-data-distributed": "MongoDB",
     "local-json-path": "./data/specs/cpu.json",
     "mongodb-collection-name": "grades",
-    "type-of-data-deposition": "MongoDB"
+    "type-of-data-deposition": "MongoDB",
+    "batch-size": 100
 }
