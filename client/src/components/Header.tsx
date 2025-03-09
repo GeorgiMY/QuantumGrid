@@ -1,5 +1,5 @@
 // Header.tsx
-import { PlusCircle, Network, ChevronDown } from "lucide-react";
+import { Network, ChevronDown, Cpu } from "lucide-react";
 import { useLanguage } from '../ui/LanguageContext';
 import type { LanguageCode } from '../ui/LanguageContext';
 import { useState } from "react";
@@ -39,37 +39,20 @@ function Header({ setPage }: HeaderProps) {
                 <ul className="flex space-x-6">
                     <li>
                         <button
-                            onClick={() => setPage("create")}
-                            className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition"
-                        >
-                            <PlusCircle size={20} />
-                            {translations.createServer}
-                        </button>
-                    </li>
-                    <li>
-                        <button
                             onClick={() => setPage("connect")}
-                            className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition" >
+                            className="flex cursor-pointer items-center justify-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition min-w-48" >
                             <Network size={20} />
                             {translations.connectServer}
                         </button>
                     </li>
                     <li>
                         <button
-                            onClick={() => setPage("jsonEditor")}
-                            className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition" >
-                            <Network size={20} />
-                            {translations.serverEditor}
+                            onClick={() => setPage("configureServer")}
+                            className="flex cursor-pointer items-center justify-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition min-w-48" >
+                            <Cpu size={20} />
+                            Конфигурирай Сървър
                         </button>
                     </li>
-                    {/* <li>
-                        <button
-                            onClick={() => setPage("specs")}
-                            className="flex cursor-pointer items-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition" >
-                            <Cpu size={20} />
-                            {translations.computerSpecs}
-                        </button>
-                    </li> */}
                 </ul>
             </nav>
 

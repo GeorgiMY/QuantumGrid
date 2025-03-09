@@ -1,8 +1,9 @@
-import { app, BrowserWindow, ipcMain } from "electron"
+import { app, BrowserWindow, ipcMain, shell } from "electron"
 import { isDev } from "./util.js";
 import { getPreloadPath, getUIPath } from "./pathResolver.js";
-import { getServerPath, openDialog, saveJSONToFile } from "./fileOperations.js";
-import { connectToServer, disconnectFromServer } from "./websocketFunctions.js";
+import { getJSONFromFile, getServerPath, saveJSONToFile } from "./fileOperations.js";
+import { connectToServer, disconnectFromServer, isWsConnected } from "./websocketFunctions.js";
+import { getEnvFile } from "./configureServer.js";
 
 let mainWindow: BrowserWindow;
 
@@ -11,7 +12,8 @@ app.on("ready", () => {
         // Shouldn't add contextIsolate or nodeIntegration because of security vulnerabilities
         webPreferences: {
             preload: getPreloadPath(),
-        }
+        },
+        autoHideMenuBar: true,
     });
 
     if (isDev()) {
@@ -24,15 +26,6 @@ app.on("ready", () => {
 
 ipcMain.on("json-message", (event, configData, filePath) => {
     saveJSONToFile(configData, filePath);
-})
-
-ipcMain.on("open-dialog", async (event) => {
-    try {
-        const { path, data } = await openDialog(mainWindow);
-        mainWindow.webContents.send("response-open-dialog", { path, data });
-    } catch (error) {
-        console.error("Error opening dialog: ", error)
-    }
 })
 
 ipcMain.on("start-websocket-connection", async (event, serverURL) => {
@@ -53,5 +46,37 @@ ipcMain.handle("setup-server", async (event) => {
         return result.filePaths[0];
     } catch (error) {
         console.error("Error opening file explorer: ", error)
+    }
+})
+
+ipcMain.handle("is-connected-to-ws", (event) => {
+    try {
+        const result = isWsConnected();
+        return result;
+    } catch (error) {
+        console.error("Error opening file explorer: ", error)
+    }
+})
+
+// Opens the link in the default browser
+ipcMain.handle("open-external-link", async (event, url) => {
+    shell.openExternal(url);
+});
+
+ipcMain.handle("get-server-config", async (event, serverPath: string) => {
+    try {
+        const jsonFile = await getJSONFromFile(`${serverPath}/server-config.json`)
+        return jsonFile;
+    } catch (error) {
+        console.error("Error in ipcMain.handle get-server-config: ", error)
+    }
+})
+
+ipcMain.handle("get-env-file", async (event, serverPath: string) => {
+    try {
+        const envContents = await getEnvFile(serverPath);
+        return envContents;
+    } catch (error) {
+        console.error("Error in ipcMain.handle get-server-config: ", error)
     }
 })

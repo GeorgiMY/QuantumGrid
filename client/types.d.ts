@@ -91,6 +91,10 @@ interface Window {
         responseOpenDialog,
         startWebsocketConnection,
         disconnectFromServer,
-        setupServer
+        setupServer,
+        isConnectedToWS,
+        openExternalLink,
+        getServerConfig,
+        getEnvFile
     }
 }

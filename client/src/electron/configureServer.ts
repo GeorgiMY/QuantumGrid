@@ -38,12 +38,6 @@ async function addMongoDBURIToEnv(envPath: string, uri: string): Promise<void> {
     }
 }
 
-// Creates the env file and adds the monogodb uri
-export async function createEnvAddMongoDBURI(serverPath: string, uri: string): Promise<void> {
-    await createEnvFile(serverPath)
-    await addMongoDBURIToEnv(`${serverPath}/.env`, uri)
-}
-
 // Adds the software to the server directory at /data/software as software.exe
 export async function addSoftware(serverPath: string, softwareFile: File): Promise<void> {
     try {
@@ -76,5 +70,32 @@ export async function addSoftware(serverPath: string, softwareFile: File): Promi
     } catch (error) {
         console.error('Error adding software:', error)
         throw new Error('Failed to add software to the server directory')
+    }
+}
+
+// Read the contents of the .env file
+export async function getEnvFile(serverPath: string): Promise<Record<string, string>> {
+    try {
+        const envContent = await fs.promises.readFile(`${serverPath}/.env`, 'utf-8');
+
+        // Split the contents into lines and parse key-value pairs
+        const envDict: Record<string, string> = {};
+        const lines = envContent.split('\n');
+
+        for (const line of lines) {
+            // Trim the line to remove whitespace
+            const trimmedLine = line.trim();
+
+            // Skip empty lines and comments
+            if (trimmedLine && !trimmedLine.startsWith('#')) {
+                const [key, value] = trimmedLine.split('=').map(part => part.trim());
+                envDict[key] = value;
+            }
+        }
+
+        return envDict;
+    } catch (error) {
+        console.error(`Error reading .env file at ${serverPath}: ${error}`);
+        throw error;
     }
 }

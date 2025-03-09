@@ -1,10 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Loader2, AlertCircle, CheckCircle2, XCircle } from "lucide-react"
-// import { connectToServer, disconnectFromServer } from "../electron/websocketFunctions"
 import { useLanguage } from "./LanguageContext"
 
 export function ConnectServer() {
@@ -39,6 +38,16 @@ export function ConnectServer() {
         setIsConnected(false)
         setConnectionStatus(translations.disconnectFromServer)
     }
+
+    useEffect(() => {
+        const checkConnection = async () => {
+            const result = await window.electron.isConnectedToWS();
+            if (result) setIsConnected(true);
+            else setIsConnected(false);
+        };
+
+        checkConnection();
+    }, []);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">

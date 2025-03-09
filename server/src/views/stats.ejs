@@ -7,22 +7,44 @@
     <title>
         <%= title %>
     </title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center;
         }
 
         .container {
             display: flex;
             height: 100vh;
-            border: 2px solid black;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            padding: 20px;
+            border-right: 2px solid black;
+            font-weight: bold;
+            height: 100vh;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #2563eb;
+            color: white;
         }
 
         .content {
-            width: 80%;
+            flex: 1;
             padding: 20px;
             text-align: left;
         }
@@ -64,13 +86,14 @@
 <body>
     <div class="container">
         <%- include('partials/sidebar') %>
+
             <div class="content">
                 <h1>Total Workers: <span class="worker-count" id="work-count">0</span></h1>
                 <table>
                     <thead>
                         <tr>
                             <th>Num</th>
-                            <th>Mac id</th>
+                            <th>Mac ID</th>
                             <th>Work Done</th>
                         </tr>
                     </thead>
@@ -80,6 +103,7 @@
                 </table>
             </div>
     </div>
+
     <script>
         const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/stats`);
 
@@ -89,14 +113,13 @@
                 document.getElementById("work-count").textContent = data.count;
                 const list = document.getElementById("worker-list");
                 list.innerHTML = "";
-                let index = 1
+                let index = 1;
                 data.macIds.forEach((macId) => {
                     const row = `<tr>
                         <td>${index}</td>
                         <td>${macId}</td>
                         <td>0</td>
-                        </tr>`;
-                    console.log(macId)
+                    </tr>`;
                     list.innerHTML += row;
                     index++;
                 });

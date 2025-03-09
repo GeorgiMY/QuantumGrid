@@ -57,3 +57,9 @@ export function sendDataToServer(data: object) {
         console.error("WebSocket is not connected.");
     }
 }
+
+// Check if there is a connected ws
+export function isWsConnected(): boolean {
+    if (ws) return true
+    else return false
+}

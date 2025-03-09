@@ -3,11 +3,6 @@ import { log } from "./logging.js";
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 
-/**
- * Saves a JSON object to a specified file path.
- * @param data - The JSON data to save.
- * @param filePath - The path to the file where the file will be saved.
- */
 export function saveJSONToFile(data: object, filePath: string): void {
     // Ensure the filePath exists
     if (!fs.existsSync(filePath)) {
@@ -19,32 +14,42 @@ export function saveJSONToFile(data: object, filePath: string): void {
     log(`New JSON data saved to ${filePath}`);
 }
 
-export async function openDialog(mainWindow: BrowserWindow) {
-    const result = await dialog.showOpenDialog(mainWindow, {
-        properties: ['openFile'],
-        filters: [{ name: 'JSON Files', extensions: ['json'] }]
-    });
-
-    if (result.canceled) {
-        return { path: null, data: null }; // Return null if dialog is canceled
-    }
-
-    const filePath = result.filePaths[0];
-    const fileContent = await fsPromises.readFile(filePath, 'utf-8'); // Use fs.promises.readFile
+// Get the JSON data from a specific file
+export async function getJSONFromFile(filePath: string): Promise<any> {
+    const fileContent = await fsPromises.readFile(filePath, 'utf-8');
     const jsonData = JSON.parse(fileContent); // Parse the JSON data
 
-    return { path: filePath, data: jsonData }; // Return both path and data
+    return jsonData;
 }
 
+// Checks if the server contains .quantumgrid file
+export async function containsQuantumGridFile(serverPath: string): Promise<boolean> {
+    try {
+        // Construct the full path to the .quantumgrid file
+        const quantumGridFilePath = `${serverPath}/.quantumgrid`;
 
+        // Check if the .quantumgrid file exists
+        await fsPromises.access(quantumGridFilePath);
+
+        // If no error was thrown, the file exists
+        console.log(`Found .quantumgrid file at ${quantumGridFilePath}`);
+        return true;
+    } catch (error) {
+        // If the file does not exist, access() will throw an error
+        throw new Error("Folder doesn't contain a Quantum Grid server")
+    }
+}
+
+// Gets a folder provided by the user
 export async function getServerPath(mainWindow: BrowserWindow): Promise<OpenDialogReturnValue> {
     const result = await dialog.showOpenDialog(mainWindow, {
         properties: ['openDirectory']
     });
 
-    if (result.canceled) {
-        return { canceled: true, filePaths: [] }; // Return null if dialog is canceled
-    }
+    // Return null if dialog is canceled
+    if (result.canceled) return { canceled: true, filePaths: [] };
+
+    await containsQuantumGridFile(result.filePaths[0]);
 
     return result;
 }
