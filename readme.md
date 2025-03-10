@@ -6,6 +6,9 @@
 
 </h3>
 
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
 ## <a name="english">What is QuantumGrid?</a> 
 QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets you create a server which distributes data to a device as well as the software for processing that data. QuantumGrid's software also lets devices connect to the specific server they want to connect with which automatically starts using their processing power to contribute to processing the data.
 
