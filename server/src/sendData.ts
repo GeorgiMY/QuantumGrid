@@ -38,19 +38,3 @@ async function sendLocalData() {
         }
     }
 }
-
-// async function getTypeOfDataDistributed(): Promise<"MongoDB" | "Local-JSON" | "Local-Files"> {
-//     const response = await fetch(path.resolve(__dirname, '../server-config.json'));
-//     const data = await response.json();
-//     const typeOfDataDistribution = data["type-of-data-distributed"];
-
-//     return typeOfDataDistribution;
-// }
-
-// async function getTypeOfDataDistribution(): Promise<"Equally-Distributed" | "CPU-Intensive" | "GPU-intensive" | "Memory-Intensive"> {
-//     const response = await fetch(path.resolve(__dirname, '../server-config.json'));
-//     const data = await response.json();
-//     const typeOfDataDistribution = data["type-of-data-distribution"];
-
-//     return typeOfDataDistribution;
-// }

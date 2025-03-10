@@ -9,7 +9,7 @@ let mainWindow: BrowserWindow;
 
 app.on("ready", () => {
     mainWindow = new BrowserWindow({
-        // Shouldn't add contextIsolate or nodeIntegration because of security vulnerabilities
+        // Won't add contextIsolate or nodeIntegration because of security vulnerabilities
         webPreferences: {
             preload: getPreloadPath(),
         },
