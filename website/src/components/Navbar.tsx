@@ -1,10 +1,8 @@
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
-
 import { Button } from "@/components/ui/button"
 
 const Navbar = () => {
@@ -24,7 +22,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="flex items-center">
-                        <Link href="/docs">
+                        <Link href="/docs/getting-started/introduction">
                             <Button variant="ghost">Docs</Button>
                         </Link>
                         <Link href="https://github.com/GeorgiMY/QuantumGrid/releases">

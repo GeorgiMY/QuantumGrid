@@ -1,14 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
-import Navbar from "../components/Navbar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function Home() {
     return (
         <div className="min-h-screen bg-background">
-            <Navbar />
-
             <main className="container mx-auto px-4 py-16">
                 <div className="text-center mb-16">
                     <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">Quantum Grid</h1>
@@ -55,7 +52,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex justify-center space-x-4">
-                    <Link href="/docs">
+                    <Link href="/docs/getting-started/introduction">
                         <Button variant="default">Documentation</Button>
                     </Link>
                     <Link href="https://github.com/GeorgiMY/QuantumGrid/releases">
