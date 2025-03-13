@@ -1,5 +1,4 @@
 // for page navigation & to sort on leftbar
-
 export type EachRoute = {
     title: string;
     href: string;
@@ -25,13 +24,13 @@ export const ROUTES: EachRoute[] = [
         ],
     },
     {
-        title: "Server Configuring",
+        title: "Configure Server",
         href: "/configure-server",
         noLink: true,
         items: [
             {
                 title: "Download Server",
-                href: "/server-download"
+                href: "/download-server"
             },
             {
                 title: "Setup For MongoDB",
@@ -51,9 +50,28 @@ export const ROUTES: EachRoute[] = [
         noLink: true,
         items: [
             {
-                title: "Download Software",
-                href: "/download-software"
-            }
+                title: "Download Quantum Grid Software",
+                href: "/download-qg-software"
+            },
+            {
+                title: "Download Project Specific Software",
+                href: "/download-project-specific-software"
+            },
+        ]
+    },
+    {
+        title: "Contribute To Quantum Grid",
+        href: "/contributing",
+        noLink: true,
+        items: [
+            {
+                title: "Rules",
+                href: "/rules"
+            },
+            {
+                title: "Development Process",
+                href: "/development-process"
+            },
         ]
     }
 ];

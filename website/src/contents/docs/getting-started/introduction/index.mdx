@@ -3,7 +3,10 @@ title: Introduction
 description: This section provides an overview of Quantum Grid.
 ---
 
-Welcome to **Quantum Grid**! Quantum Grid is a software which lets you create distributed computing servers.
+## Quantum Grid
+Welcome to **Quantum Grid**! Quantum Grid is a distributed computing framework. Quantum Grid's software lets you create a server which distributes data and the software for processing that data.
+
+Quantum Grid's software also lets devices connect to the specific server they want to connect with which automatically starts using their processing power to contribute to processing data
 
 
 ##  Open Source Philosophy
@@ -16,20 +19,31 @@ Quantum Grid is proudly **open-source**! 🎉
 
 ## Project Overview
 
-**Quantum Grid** is an easy way to horizontally scale your operation. Key features include:
+**Quantum Grid** is an easy way to horizontally scale your computational power. Key features include:
 
 ### Key Features
-
 | **Feature**                   | **Description**                                          |
 |-------------------------------|----------------------------------------------------------|
-| Easy Horizontal Scaling       | Write interactive documentation with MDX.                |
+| Easy Horizontal Scaling       | Create a server for distributed systems with ease        |
+| MongoDB support               | Supports MongoDB for data distribution                   |
+| All OS support                | Downloadable on all major operating systems: Mac, Linux, and Windows |
+| Global Data Distribution      | Data transferred over HTTP allows for distant connections |
 
 
 ## Technology & Libraries
 ### Server
+- **Express.js v5** - Light framework that allows you to build RESTful APIs.
+- **Websockets** - The server connects to the software using websockets.
+- **SQLite** - Keeping track of 
+- **Logging** - There's logs that are in plain text files in the ```data``` folder that help keep track of what's going on while the server distributes data.
+- **ejs** - Simple web templating system to showcase working and blacklisted devices
+- **MongoDB** - Extracts data in batches from the provided 
 ### Software
+- **Electron v34** - Framework that allows you to build software using JavaScript.
+- **Electron-Vite-Typescript Template** - The [template](https://github.com/GeorgiMY/Vite-Electron-Template) made by [Georgi Yordanov](https://github.com/GeorgiMY/) gives the ability to use React v19, Typescript, TailWindCSS v4 and ShadCN. It includes hot reloading, typesafe IPC and typesafe events.
+- **Websockets** - The software connects to the server using websockets.
 ### Website
-- **Next.js 15** - The powerful React framework optimized for production.
-- **Tailwind CSS** - Utility-first styling for quick, clean designs.
-- **Shadcn-UI** - Elegant, accessible components for a polished look.
+- **Next.js v15** - The powerful React framework optimized for production.
+- **Tailwind CSS v4** - Utility-first styling for quick, clean designs.
+- **ShadCN** - Elegant, accessible components for a polished look.
 - **next-mdx-remote** - Enables MDX support for dynamic, interactive Markdown content.
