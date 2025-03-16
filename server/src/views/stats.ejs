@@ -109,17 +109,21 @@
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data);
+
             if (data.type === "workCount") {
                 document.getElementById("work-count").textContent = data.count;
                 const list = document.getElementById("worker-list");
                 list.innerHTML = "";
                 let index = 1;
+
                 data.macIds.forEach((macId) => {
-                    const row = `<tr>
+                    const row = `
+                    <tr>
                         <td>${index}</td>
                         <td>${macId}</td>
                         <td>0</td>
                     </tr>`;
+
                     list.innerHTML += row;
                     index++;
                 });

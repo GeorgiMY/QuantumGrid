@@ -7,5 +7,7 @@
     "local-json-path": "./data/specs/cpu.json",
     "mongodb-collection-name": "grades",
     "type-of-data-deposition": "MongoDB",
-    "batch-size": 100
+    "batch-size": 100,
+    "blacklist": true,
+    "whitelist": false
 }

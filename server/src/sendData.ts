@@ -6,7 +6,6 @@ import { addRecord } from "./queries";
 export function startSendingDataPeriodically(period: number): cron.ScheduledTask {
     console.log(`Starting data sending every ${period} seconds`);
     const cronJob = cron.schedule(`*/${period} * * * * *`, () => {
-        console.log("Cron job triggered");
         sendLocalData();
     });
     cronJob.start();

@@ -3,6 +3,8 @@ import { Server } from 'http';
 import { workConnections, statsClients, broadcastWorkCount, sendWorkCount } from './stats';
 import { saveData } from './receiveData';
 import { log } from "./logging";
+import { isBlacklisted, isWhitelisted } from "./queries";
+import { getServerConfig } from "./utils/config";
 
 export function setupWebSocket(server: Server) {
     const wss = new WebSocketServer({ server });
@@ -17,8 +19,29 @@ export function setupWebSocket(server: Server) {
 
         console.log(`New connection attempt to path: ${connectionPath} from device with MAC id: ${macId}`);
 
+        const serverConfig = getServerConfig();
         if (connectionPath === '/work') {
             if (macId) {
+                // Check if blacklist is set to true in server-config.json, if true - check if the mac address is blacklisted
+                if (serverConfig["blacklist"]) {
+                    const isDeviceBlacklisted = isBlacklisted(macId);
+                    if (isDeviceBlacklisted) {
+                        ws.close();
+                        console.log(`Blacklisted device with mac address: ${macId} tried connecting`)
+                        return;
+                    }
+                }
+
+                // Check if blacklist is set to true in server-config.json, if true - check if the mac address is blacklisted
+                if (serverConfig["whitelist"]) {
+                    const isDeviceWhitelisted = isWhitelisted(macId);
+                    if (!isDeviceWhitelisted) {
+                        ws.close();
+                        console.log(`Non-whitelisted device with mac address: ${macId} tried connecting`)
+                        return;
+                    }
+                }
+
                 workConnections.add({ socket: ws, macId });
                 log(`Client from device with MAC id: ${macId} connected. Total work connections: ${workConnections.size}`);
                 broadcastWorkCount();

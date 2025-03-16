@@ -151,14 +151,14 @@
     <%- include('partials/sidebar') %>
 
         <div class="container">
-            <h1>Blacklist MAC Address</h1>
+            <h1>Whitelist MAC Address</h1>
 
-            <form action="/blacklist/create" method="POST" class="mac-form">
+            <form action="/whitelist/create" method="POST" class="mac-form">
                 <label for="mac">Enter MAC Address</label>
                 <input id="mac" type="text" name="mac" placeholder="Enter MAC Address" maxlength="17" minlength="17"
                     required>
                 <br>
-                <button type="submit">Blacklist</button>
+                <button type="submit">Whitelist</button>
             </form>
 
             <div class="table-container">
@@ -172,7 +172,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% allBlacklistedDevices.forEach(device=> { %>
+                        <% allWhitelistedDevices.forEach(device=> { %>
                             <tr>
                                 <td>
                                     <%= device.mac_address %>
@@ -184,7 +184,7 @@
                                     <%= device.work_done %>
                                 </td>
                                 <td>
-                                    <form action="/blacklist/remove" method="POST" class="remove-form">
+                                    <form action="/whitelist/remove" method="POST" class="remove-form">
                                         <input type="hidden" name="mac" value="<%= device.mac_address %>">
                                         <button type="submit" class="remove-btn">Remove</button>
                                     </form>

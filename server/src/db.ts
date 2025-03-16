@@ -16,6 +16,14 @@ recordsDB.exec(`
     );
 
     INSERT OR IGNORE INTO index_tracker (id, current_index) VALUES (1, 0);
+
+    CREATE TABLE IF NOT EXISTS devices (
+        mac_address VARCHAR(17) PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        whitelisted BOOLEAN NOT NULL DEFAULT false,
+        blacklisted BOOLEAN NOT NULL DEFAULT false,
+        work_done INTEGER NOT NULL DEFAULT 0
+    );
 `);
 
 export default recordsDB;
