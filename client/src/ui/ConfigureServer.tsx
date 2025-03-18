@@ -16,6 +16,8 @@ interface ConfigData {
     "server-name": string;
     "server-description": string;
     "batch-size": string;
+    "whitelist": string;
+    "blacklist": string;
 }
 
 interface EnvData {
@@ -38,9 +40,11 @@ export function ConnectServer() {
         "local-json-path": translations.localJsonPath,
         "mongodb-collection-name": translations.mongodbCollectionName,
         "type-of-data-deposition": translations.typeOfDataDeposition,
-        "server-name": "Име на сървър",
-        "server-description": "Описание на сървър",
-        "batch-size": "Размер на партидата",
+        "server-name": translations.serverName,
+        "server-description": translations.serverDescription,
+        "batch-size": translations.batchSize,
+        "whitelist": translations.whitelist,
+        "blacklist": translations.blacklist,
     };
 
     const handleChange = (key: keyof ConfigData, value: string | boolean) => {
@@ -168,6 +172,18 @@ export function ConnectServer() {
                                                         <SelectItem value="sample-option-3">Sample Option 3</SelectItem> */}
                                                     </SelectContent>
                                                 </Select>
+                                            ) : key === "whitelist" ? (
+                                                <input
+                                                    type="checkbox"
+                                                    checked={value as boolean}
+                                                    onChange={(e) => handleChange(key as keyof ConfigData, e.target.checked)}
+                                                    className="w-1/2" />
+                                            ) : key === "blacklist" ? (
+                                                <input
+                                                    type="checkbox"
+                                                    checked={value as boolean}
+                                                    onChange={(e) => handleChange(key as keyof ConfigData, e.target.checked)}
+                                                    className="w-1/2" />
                                             ) : (
                                                 <Input
                                                     value={value}
@@ -201,21 +217,24 @@ export function ConnectServer() {
                     <li className="mb-4">
                         {/* 1. Download server from here: */}
                         <button onClick={handleGitHubReleases} className="cursor-pointer" >
-                            1. Изтегли сървър от тук: GitHub Releases
+                            {/* 1. Изтегли сървър от тук: GitHub Releases */}
+                            1. {translations.downloadServerHere}: GitHub Releases
                         </button>
                     </li>
                     <li className="mb-4">
-                        2. Разархивирай съврърът
+                        2. {translations.unzipServer}
                     </li>
                     <li className="mb-4" >
                         {/* 2. Choose where you've saved the server to set it up: <Button onClick={handleSetupServer}>Server Location</Button> */}
-                        3. Избери пътеката, където е съхранен съврърът <Button onClick={handleSetupServer} className="cursor-pointer text-4xl p-8 mb-4"> Разположение На Сървър</Button>
+                        {/* 3. Избери пътеката, където е съхранен съврърът <Button onClick={handleSetupServer} className="cursor-pointer text-4xl p-8 mb-4"> Разположение На Сървър</Button> */}
+                        3. {translations.chooseWhereServerSaved} <Button onClick={handleSetupServer} className="cursor-pointer text-4xl p-8 mb-4"> {translations.placementOfServer}</Button>
                         {/* <p>Chosen path: {pathToServer}</p> */}
-                        <p className="mb-8">Избран път: <code className="font-bold italic">{pathToServer}</code></p>
+                        {/* <p className="mb-8">Избран път: <code className="font-bold italic">{pathToServer}</code></p> */}
+                        <p className="mb-8">{translations.chosenPath}: <code className="font-bold italic">{pathToServer}</code></p>
                     </li>
                     <li className="mb-4" >
                         {/* <Button onClick={startServerConfiguring}>Configure Server</Button> */}
-                        <Button onClick={startServerConfiguring} className="cursor-pointer text-4xl p-8" >Конфигурирай Сървър</Button>
+                        <Button onClick={startServerConfiguring} className="cursor-pointer text-4xl p-8" >{translations.serverConfigure}</Button>
                     </li>
                 </ul>
             )}

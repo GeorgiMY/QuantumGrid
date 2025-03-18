@@ -76,6 +76,18 @@ type Translation = {
     typeOfDataDeposition: string;
     chooseFile: string;
     commingSoon: string;
+    startServerConfiguring: string;
+    chooseWhereServerSaved: string;
+    placementOfServer: string;
+    unzipServer: string;
+    downloadServerHere: string;
+    serverConfigure: string;
+    chosenPath: string;
+    whitelist: string;
+    blacklist: string;
+    batchSize: string;
+    serverName: string;
+    serverDescription: string;
 }
 
 type UnsubscribeFunction = () => void;

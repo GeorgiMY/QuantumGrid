@@ -51,7 +51,19 @@
         "mongodbCollectionName": "MongoDB Collection Name",
         "typeOfDataDeposition": "Type of Data Deposition",
         "chooseFile": "Choose a file",
-        "commingSoon": "Comming Soon"
+        "commingSoon": "Comming Soon",
+        "startServerConfiguring": "Start Server Configuring",
+        "chooseWhereServerSaved": "Choose where the server is saved",
+        "placementOfServer": "Server Placement",
+        "unzipServer": "Unzip Server",
+        "downloadServerHere": "Download Server Here",
+        "serverConfigure": "Configure Server",
+        "chosenPath": "Chosen Path",
+        "whitelist": "Whitelist",
+        "blacklist": "Blacklist",
+        "batchSize": "Batch Size",
+        "serverName": "Server Name",
+        "serverDescription": "Server Description"
     },
     "bg": {
         "createServer": "Създаване на сървър",
@@ -105,7 +117,19 @@
         "mongodbCollectionName": "Име на MongoDB колекция",
         "typeOfDataDeposition": "Тип на депозиране на данни",
         "chooseFile": "Изберете файл",
-        "commingSoon": "Очаквайте скоро"
+        "commingSoon": "Очаквайте скоро",
+        "startServerConfiguring": "Start Server Configuring",
+        "chooseWhereServerSaved": "Избери пътеката, където е съхранен съврърът",
+        "placementOfServer": "Разположение На Сървър",
+        "unzipServer": "Разархивирай сървърът",
+        "downloadServerHere": "зтегли сървър от тук",
+        "serverConfigure": "Конфигуриране на сървър",
+        "chosenPath": "Избран път",
+        "whitelist": "Whitelist",
+        "blacklist": "Blacklist",
+        "batchSize": "Размер на партида",
+        "serverName": "Име на сървър",
+        "serverDescription": "Описание на сървър"
     },
     "zh": {
         "createServer": "创建服务器",
@@ -159,7 +183,19 @@
         "mongodbCollectionName": "MongoDB集合名称",
         "typeOfDataDeposition": "数据存放类型",
         "chooseFile": "选择文件",
-        "commingSoon": "即将推出"
+        "commingSoon": "即将推出",
+        "startServerConfiguring": "开始服务器配置",
+        "chooseWhereServerSaved": "选择服务器保存位置",
+        "placementOfServer": "服务器位置",
+        "unzipServer": "解压服务器",
+        "downloadServerHere": "从这里下载服务器",
+        "serverConfigure": "配置服务器",
+        "chosenPath": "选择的路径",
+        "whitelist": "白名单",
+        "blacklist": "黑名单",
+        "batchSize": "批量大小",
+        "serverName": "服务器名称",
+        "serverDescription": "服务器描述"
     },
     "pt": {
         "createServer": "Criar Servidor",
@@ -213,7 +249,19 @@
         "mongodbCollectionName": "Nome da Coleção MongoDB",
         "typeOfDataDeposition": "Tipo de Deposição de Dados",
         "chooseFile": "Escolher um arquivo",
-        "commingSoon": "Em breve"
+        "commingSoon": "Em breve",
+        "startServerConfiguring": "Iniciar Configuração do Servidor",
+        "chooseWhereServerSaved": "Escolha onde o servidor está salvo",
+        "placementOfServer": "Localização do Servidor",
+        "unzipServer": "Descompactar Servidor",
+        "downloadServerHere": "Baixar Servidor Aqui",
+        "serverConfigure": "Configurar Servidor",
+        "chosenPath": "Caminho Escolhido",
+        "whitelist": "Lista Permitida",
+        "blacklist": "Lista Bloqueada",
+        "batchSize": "Tamanho do Lote",
+        "serverName": "Nome do Servidor",
+        "serverDescription": "Descrição do Servidor"
     },
     "pt-br": {
         "createServer": "Criar Servidor",
@@ -267,7 +315,19 @@
         "mongodbCollectionName": "Nome da Coleção MongoDB",
         "typeOfDataDeposition": "Tipo de Deposição de Dados",
         "chooseFile": "Escolher um arquivo",
-        "commingSoon": "Em breve"
+        "commingSoon": "Em breve",
+        "startServerConfiguring": "Iniciar Configuração do Servidor",
+        "chooseWhereServerSaved": "Escolha onde o servidor está salvo",
+        "placementOfServer": "Localização do Servidor",
+        "unzipServer": "Descompactar Servidor",
+        "downloadServerHere": "Baixar Servidor Aqui",
+        "serverConfigure": "Configurar Servidor",
+        "chosenPath": "Caminho Escolhido",
+        "whitelist": "Lista Permitida",
+        "blacklist": "Lista Bloqueada",
+        "batchSize": "Tamanho do Lote",
+        "serverName": "Nome do Servidor",
+        "serverDescription": "Descrição do Servidor"
     },
     "es": {
         "createServer": "Crear Servidor",
@@ -321,7 +381,19 @@
         "mongodbCollectionName": "Nombre de la Colección MongoDB",
         "typeOfDataDeposition": "Tipo de Depósito de Datos",
         "chooseFile": "Elegir un archivo",
-        "commingSoon": "Próximamente"
+        "commingSoon": "Próximamente",
+        "startServerConfiguring": "Iniciar Configuración del Servidor",
+        "chooseWhereServerSaved": "Elegir dónde se guarda el servidor",
+        "placementOfServer": "Ubicación del Servidor",
+        "unzipServer": "Descomprimir Servidor",
+        "downloadServerHere": "Descargar Servidor Aquí",
+        "serverConfigure": "Configurar Servidor",
+        "chosenPath": "Ruta Elegida",
+        "whitelist": "Lista Blanca",
+        "blacklist": "Lista Negra",
+        "batchSize": "Tamaño del Lote",
+        "serverName": "Nombre del Servidor",
+        "serverDescription": "Descripción del Servidor"
     },
     "ja": {
         "createServer": "サーバーを作成",
@@ -375,6 +447,18 @@
         "mongodbCollectionName": "MongoDBコレクション名",
         "typeOfDataDeposition": "データの預け入れの種類",
         "chooseFile": "ファイルを選択",
-        "commingSoon": "近日公開"
+        "commingSoon": "近日公開",
+        "startServerConfiguring": "サーバー設定を開始",
+        "chooseWhereServerSaved": "サーバーの保存場所を選択",
+        "placementOfServer": "サーバーの配置",
+        "unzipServer": "サーバーを解凍",
+        "downloadServerHere": "サーバーをダウンロード",
+        "serverConfigure": "サーバーを設定",
+        "chosenPath": "選択されたパス",
+        "whitelist": "ホワイトリスト",
+        "blacklist": "ブラックリスト",
+        "batchSize": "バッチサイズ",
+        "serverName": "サーバー名",
+        "serverDescription": "サーバーの説明"
     }
 }

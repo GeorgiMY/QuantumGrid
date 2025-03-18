@@ -50,7 +50,7 @@ function Header({ setPage }: HeaderProps) {
                             onClick={() => setPage("configureServer")}
                             className="flex cursor-pointer items-center justify-center gap-2 px-4 py-2 text-white bg-gray-800 rounded hover:bg-gray-700 transition min-w-48" >
                             <Cpu size={20} />
-                            Конфигурирай Сървър
+                            {translations.serverConfigure}
                         </button>
                     </li>
                 </ul>
