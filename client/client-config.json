@@ -1,3 +1,4 @@
 {
-    "data-deposition": "./data/unprocessed"
+  "data-received": "./data/unprocessed",
+  "data-for-depositing": "./data/processed"
 }

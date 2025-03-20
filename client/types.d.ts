@@ -107,6 +107,8 @@ interface Window {
         isConnectedToWS,
         openExternalLink,
         getServerConfig,
-        getEnvFile
+        getEnvFile,
+        fetchClientConfig,
+        saveClientConfig
     }
 }

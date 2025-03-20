@@ -4,6 +4,7 @@ import { getPreloadPath, getUIPath } from "./pathResolver.js";
 import { getJSONFromFile, getServerPath, saveJSONToFile } from "./fileOperations.js";
 import { connectToServer, disconnectFromServer, isWsConnected } from "./websocketFunctions.js";
 import { getEnvFile } from "./configureServer.js";
+import { log } from "./logging.js";
 
 let mainWindow: BrowserWindow;
 
@@ -32,6 +33,7 @@ ipcMain.on("start-websocket-connection", async (event, serverURL) => {
     try {
         await connectToServer(`ws://${serverURL}`);
     } catch (error) {
+        log(`[ERROR] starting WebSocket connection: ${error}`);
         console.error("Error starting WebSocket connection: ", error);
     }
 })
@@ -45,7 +47,8 @@ ipcMain.handle("setup-server", async (event) => {
         const result = await getServerPath(mainWindow);
         return result.filePaths[0];
     } catch (error) {
-        console.error("Error opening file explorer: ", error)
+        log(`[ERROR] opening file explorer: ${error}`);
+        console.error("Error opening file explorer: ", error);
     }
 })
 
@@ -54,6 +57,7 @@ ipcMain.handle("is-connected-to-ws", (event) => {
         const result = isWsConnected();
         return result;
     } catch (error) {
+        log(`[ERROR] opening file explorer: ${error}`)
         console.error("Error opening file explorer: ", error)
     }
 })
@@ -68,7 +72,8 @@ ipcMain.handle("get-server-config", async (event, serverPath: string) => {
         const jsonFile = await getJSONFromFile(`${serverPath}/server-config.json`)
         return jsonFile;
     } catch (error) {
-        console.error("Error in ipcMain.handle get-server-config: ", error)
+        log(`[ERROR] in ipcMain.handle get-server-config: ${error}`)
+        console.error("ERROR in ipcMain.handle get-server-config: ", error)
     }
 })
 
@@ -77,6 +82,26 @@ ipcMain.handle("get-env-file", async (event, serverPath: string) => {
         const envContents = await getEnvFile(serverPath);
         return envContents;
     } catch (error) {
+        log(`[ERROR] in ipcMain.handle get-server-config: ${error}`)
         console.error("Error in ipcMain.handle get-server-config: ", error)
+    }
+})
+
+ipcMain.handle("fetch-client-config", async (event) => {
+    try {
+        const jsonFile = await getJSONFromFile(`./client-config.json`)
+        return jsonFile;
+    } catch (error) {
+        log(`[ERROR] Error in ipcMain.handle fetch-client-config: ${error}`)
+        console.error("[ERROR] Error in ipcMain.handle fetch-client-config: ", error)
+    }
+})
+
+ipcMain.handle("save-client-config", async (event, data: object, filePath: string) => {
+    try {
+        saveJSONToFile(data, filePath);
+    } catch (error) {
+        log(`[ERROR] Error in ipcMain.handle save-client-config: ${error}`)
+        console.error(`[ERROR] Error in ipcMain.handle save-client-config: ${error}`)
     }
 })

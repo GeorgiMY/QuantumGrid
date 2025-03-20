@@ -85,18 +85,18 @@ export function ConnectServer() {
 
         const confirmSave = window.confirm(translations.confirmSave);
 
-        if (confirmSave) {
-            try {
-                if (!pathToServer) {
-                    throw new Error("File path is undefined. Cannot save the file.");
-                }
-                await window.electron.saveJSON(configData, `${pathToServer}/server-config.json`);
-                // await window.electron.saveENV(envData, `${pathToServer}/.env`);
-                alert("File saved successfully!");
-            } catch (error) {
-                console.error("Error saving file:", error);
-                alert("Error saving file. Please try again.");
+        if (!confirmSave) return;
+
+        try {
+            if (!pathToServer) {
+                throw new Error("File path is undefined. Cannot save the file.");
             }
+            await window.electron.saveJSON(configData, `${pathToServer}/server-config.json`);
+            // await window.electron.saveENV(envData, `${pathToServer}/.env`);
+            alert("File saved successfully!");
+        } catch (error) {
+            console.error("Error saving file:", error);
+            alert("Error saving file. Please try again.");
         }
     };
 

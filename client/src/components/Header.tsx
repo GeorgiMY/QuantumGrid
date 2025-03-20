@@ -1,8 +1,9 @@
 // Header.tsx
-import { Network, ChevronDown, Cpu } from "lucide-react";
+import { Network, ChevronDown, Cpu, Settings } from "lucide-react";
 import { useLanguage } from '../ui/LanguageContext';
 import type { LanguageCode } from '../ui/LanguageContext';
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 interface HeaderProps {
     setPage: (page: string) => void;
@@ -60,8 +61,7 @@ function Header({ setPage }: HeaderProps) {
                 <button
                     aria-label="Select language"
                     onClick={toggleDropdown}
-                    className="flex cursor-pointer items-center gap-2 px-4 py-2 bg-gray-800 rounded hover:bg-gray-700 transition"
-                >
+                    className="flex cursor-pointer items-center gap-2 px-4 py-2 bg-gray-800 rounded hover:bg-gray-700 transition" >
                     <span>{selectedLanguage.name}</span>
                     <ChevronDown size={16} />
                 </button>
@@ -72,13 +72,14 @@ function Header({ setPage }: HeaderProps) {
                             <li
                                 key={language.code}
                                 onClick={() => handleLanguageSelect(language)}
-                                className="flex items-center gap-3 px-4 py-2 cursor-pointer hover:bg-gray-700 transition"
-                            >
+                                className="flex items-center gap-3 px-4 py-2 cursor-pointer hover:bg-gray-700 transition" >
                                 {language.name}
                             </li>
                         ))}
                     </ul>
                 )}
+
+                <Button className="cursor-pointer" onClick={() => setPage("settings")}><Settings /></Button>
             </div>
         </header>
     );

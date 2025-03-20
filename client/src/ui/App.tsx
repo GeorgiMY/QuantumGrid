@@ -7,6 +7,7 @@ import ConnectServer from './ConnectServer';
 import { LanguageProvider } from './LanguageContext';
 import Home from './Home';
 import ConfigureServer from './ConfigureServer';
+import Settings from './Settings';
 
 function App() {
     const [currentPage, setCurrentPage] = useState("home");
@@ -20,6 +21,7 @@ function App() {
                     {currentPage === "connect" && <ConnectServer />}
                     {/* {currentPage === "specs" && <ComputerSpecs />} */}
                     {currentPage === "configureServer" && <ConfigureServer />}
+                    {currentPage === "settings" && <Settings />}
                 </div>
             </main>
         </LanguageProvider>
