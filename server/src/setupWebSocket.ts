@@ -2,8 +2,8 @@ import { WebSocketServer, WebSocket } from "ws";
 import { Server } from 'http';
 import { workConnections, statsClients, broadcastWorkCount, sendWorkCount } from './stats';
 import { saveData } from './receiveData';
-import { log } from "./logging";
-import { isBlacklisted, isWhitelisted } from "./queries";
+import { log } from "./utils/logging";
+import { isBlacklisted, isWhitelisted, setDeviceWorking } from "./queries";
 import { getServerConfig } from "./utils/config";
 
 export function setupWebSocket(server: Server) {
@@ -64,8 +64,13 @@ export function setupWebSocket(server: Server) {
         // Handle incoming messages
         ws.on("message", async (message: string) => {
             try {
-                const jsonData: object[] = JSON.parse(message); // Parse the incoming message as JSON
-                await saveData(jsonData); // Save the JSON data to MongoDB
+                // Parse the incoming message as JSON
+                const jsonData: object[] = JSON.parse(message);
+                // Save the JSON data to MongoDB
+                await saveData(jsonData);
+
+                // Make the device available to receive more work again
+                setDeviceWorking(macId, false)
             } catch (error) {
                 console.error('Error processing message:', error);
             }

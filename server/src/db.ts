@@ -22,7 +22,8 @@ recordsDB.exec(`
         name VARCHAR(50) NOT NULL,
         whitelisted BOOLEAN NOT NULL DEFAULT false,
         blacklisted BOOLEAN NOT NULL DEFAULT false,
-        work_done INTEGER NOT NULL DEFAULT 0
+        work_done INTEGER NOT NULL DEFAULT 0,
+        working BOOLEAN NOT NULL DEFAULT 1
     );
 `);
 

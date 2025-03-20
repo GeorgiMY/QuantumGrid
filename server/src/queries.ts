@@ -109,8 +109,25 @@ export const isBlacklisted = (macAddress: string): boolean => {
     return device ? device.blacklisted === 1 : false;
 }
 
+////////////////////////////////////////////////////////////////////////////
+
 // Function to increase the work done for a specific device
 export const increaseWorkDone = (macAddress: string, amount: number): void => {
     const stmt = db.prepare(`UPDATE devices SET work_done = work_done + ? WHERE mac_address = ?`);
     stmt.run(amount, macAddress);
 };
+
+export const isDeviceWorking = (macAddress: string): boolean => {
+    const stmt = db.prepare("SELECT * FROM devices WHERE mac_address = ?");
+    const device: any = stmt.get(macAddress);
+
+    return device ? device.working === 1 : false;
+}
+
+export const setDeviceWorking = (macAddress: string, working: boolean): void => {
+    // Insert if it doesn't exist
+    addDevice(macAddress, "Device", false, false);
+
+    const stmt = db.prepare(`UPDATE devices SET working = ? WHERE mac_address = ?`);
+    stmt.run(working ? 1 : 0, macAddress);
+}

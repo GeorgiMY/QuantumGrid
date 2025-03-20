@@ -15,6 +15,9 @@ app.on("ready", () => {
             preload: getPreloadPath(),
         },
         autoHideMenuBar: true,
+        width: 1280,
+        height: 720,
+        fullscreen: true
     });
 
     if (isDev()) {

@@ -23,30 +23,13 @@ const PORT = 3000;
 setupWebSocket(server);
 
 // Start sending data periodically (every 5 seconds)
-startSendingDataPeriodically(5);
+startSendingDataPeriodically(15);
 
 app.use(express.json());
 
 app.get('/', (req: Request, res: Response) => {
     res.send("This is a server")
 })
-
-/* app.post('/network/join', async (req: Request, res: Response) => {
-    const body = await req.body;
-
-    // Creating an object that extends SystemInfo
-    const info: systemInfo = {
-        osType: body.osType,
-        cpu: body.cpu,
-        ram: body.ram,
-        disks: body.disks,
-        gpu: body.gpu,
-        ipAddress: body.ipAddress,
-        localTime: body.localTime
-     };
-
-     res.json(info);
-}); */
 
 // When a device visits this page a websocket connection will try to be established
 // If it is successfully established the device will automatically start receiving work

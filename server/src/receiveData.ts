@@ -1,6 +1,7 @@
 import path from 'path';
 import { insertNewDocument, insertNewDocuments } from './mongoDBFunctions';
-import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { getServerConfig } from './utils/config';
 
 // Saves a JSON object in a new file in /data/processed
 export async function saveJSONFileLocally(data: object, filename: string) {
@@ -25,8 +26,7 @@ export async function saveJSONToFileLocally(data: object, filename: string) {
 
 // Saves a JSON object to MongoDB
 export async function saveJSONToMongoDB(data: object) {
-    const configPath = path.resolve(__dirname, '../server-config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = getServerConfig();
     const collectionName: string = config["mongodb-collection-name"];
 
     try {
@@ -39,8 +39,7 @@ export async function saveJSONToMongoDB(data: object) {
 
 // Saves JSON objects to MongoDB
 export async function saveJSONsToMongoDB(data: object[]) {
-    const configPath = path.resolve(__dirname, '../server-config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = getServerConfig();
     const collectionName: string = config["mongodb-collection-name"];
 
     try {
@@ -52,17 +51,16 @@ export async function saveJSONsToMongoDB(data: object[]) {
 }
 
 export async function saveData(data: object[]) {
-    const configPath = path.resolve(__dirname, '../server-config.json');
-    const config = JSON.parse(readFileSync(configPath, 'utf-8'));
+    const config = getServerConfig();
     const typeOfFileSaving: string = config["type-of-data-deposition"]
 
     switch (typeOfFileSaving) {
-        case "MongoDB":
+        case "mongodb":
             await saveJSONsToMongoDB(data);
             break;
-        case "Local-JSON":
+        case "local-json":
             break;
-        case "Local-Files":
+        case "local-files":
             break;
         default:
             throw new Error("At sendDataDependingOnDataDistributed() all cases failed. Unknown typeOfDataDistributed was tried");
