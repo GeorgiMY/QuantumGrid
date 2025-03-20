@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain, shell } from "electron"
 import { isDev } from "./util.js";
 import { getPreloadPath, getUIPath } from "./pathResolver.js";
-import { getJSONFromFile, getServerPath, saveJSONToFile } from "./fileOperations.js";
+import { getJSONFromFile, getServerPath, saveENVFile, saveJSONToFile } from "./fileOperations.js";
 import { connectToServer, disconnectFromServer, isWsConnected } from "./websocketFunctions.js";
 import { getEnvFile } from "./configureServer.js";
 import { log } from "./logging.js";
@@ -103,5 +103,14 @@ ipcMain.handle("save-client-config", async (event, data: object, filePath: strin
     } catch (error) {
         log(`[ERROR] Error in ipcMain.handle save-client-config: ${error}`)
         console.error(`[ERROR] Error in ipcMain.handle save-client-config: ${error}`)
+    }
+})
+
+ipcMain.handle("save-env-file", async (even, data: object, filePath: string) => {
+    try {
+        saveENVFile(data, filePath)
+    } catch (error) {
+        log(`[ERROR] Error in ipcMain.handle save-env-file: ${error}`)
+        console.error(`[ERROR] Error in ipcMain.handle save-env-file: ${error}`)
     }
 })

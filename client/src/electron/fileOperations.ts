@@ -53,3 +53,26 @@ export async function getServerPath(mainWindow: BrowserWindow): Promise<OpenDial
 
     return result;
 }
+
+// Saves the environment file to a specific path
+export async function saveENVFile(data: object, filePath: string) {
+    try {
+        // Ensure the filePath exists
+        const dirPath = filePath.substring(0, filePath.lastIndexOf('/'));
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true });
+        }
+
+        // Convert the data object to a .env file format
+        const envData = Object.entries(data)
+            .map(([key, value]) => `${key}=${value}`)
+            .join('\n');
+
+        // Write the .env data to the file
+        await fsPromises.writeFile(filePath, envData, 'utf-8');
+        log(`Environment data saved to ${filePath}`);
+    } catch (error) {
+        log(`Failed to save environment data to ${filePath}: ${error}`);
+        throw error;
+    }
+}

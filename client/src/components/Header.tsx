@@ -57,7 +57,7 @@ function Header({ setPage }: HeaderProps) {
                 </ul>
             </nav>
 
-            <div className="relative">
+            <div className="flex items-center gap-3.5" >
                 <button
                     aria-label="Select language"
                     onClick={toggleDropdown}
@@ -67,7 +67,7 @@ function Header({ setPage }: HeaderProps) {
                 </button>
 
                 {isDropdownOpen && (
-                    <ul className="absolute right-0 mt-2 py-1 w-48 bg-gray-800 border border-gray-600 rounded shadow-lg z-50">
+                    <ul className="absolute right-0 mt-64 py-1 w-48 bg-gray-800 border border-gray-600 rounded shadow-lg z-50">
                         {languages.map((language) => (
                             <li
                                 key={language.code}
@@ -79,7 +79,7 @@ function Header({ setPage }: HeaderProps) {
                     </ul>
                 )}
 
-                <Button className="cursor-pointer" onClick={() => setPage("settings")}><Settings /></Button>
+                <Button className="flex cursor-pointer" onClick={() => setPage("settings")}><Settings /></Button>
             </div>
         </header>
     );

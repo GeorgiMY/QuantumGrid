@@ -92,7 +92,7 @@ export function ConnectServer() {
                 throw new Error("File path is undefined. Cannot save the file.");
             }
             await window.electron.saveJSON(configData, `${pathToServer}/server-config.json`);
-            // await window.electron.saveENV(envData, `${pathToServer}/.env`);
+            await window.electron.saveENVFile(envData, `${pathToServer}/.env`);
             alert("File saved successfully!");
         } catch (error) {
             console.error("Error saving file:", error);
@@ -200,6 +200,7 @@ export function ConnectServer() {
                                     <label className="text-xl font-medium w-1/2">MONGODB_URI:</label>
                                     <Input
                                         value={envData.MONGODB_URI}
+                                        onChange={(e) => setEnvData({ ...envData, MONGODB_URI: e.target.value })}
                                         className="text-l p-3" />
                                 </div>
                             )}
@@ -213,30 +214,27 @@ export function ConnectServer() {
                     </Card>
                 </div>
             ) : (
-                <ul className="text-4xl items-center">
-                    <li className="mb-4">
-                        {/* 1. Download server from here: */}
-                        <button onClick={handleGitHubReleases} className="cursor-pointer" >
-                            {/* 1. Изтегли сървър от тук: GitHub Releases */}
-                            1. {translations.downloadServerHere}: GitHub Releases
-                        </button>
-                    </li>
-                    <li className="mb-4">
-                        2. {translations.unzipServer}
-                    </li>
-                    <li className="mb-4" >
-                        {/* 2. Choose where you've saved the server to set it up: <Button onClick={handleSetupServer}>Server Location</Button> */}
-                        {/* 3. Избери пътеката, където е съхранен съврърът <Button onClick={handleSetupServer} className="cursor-pointer text-4xl p-8 mb-4"> Разположение На Сървър</Button> */}
-                        3. {translations.chooseWhereServerSaved} <Button onClick={handleSetupServer} className="cursor-pointer text-4xl p-8 mb-4"> {translations.placementOfServer}</Button>
-                        {/* <p>Chosen path: {pathToServer}</p> */}
-                        {/* <p className="mb-8">Избран път: <code className="font-bold italic">{pathToServer}</code></p> */}
-                        <p className="mb-8">{translations.chosenPath}: <code className="font-bold italic">{pathToServer}</code></p>
-                    </li>
-                    <li className="mb-4" >
-                        {/* <Button onClick={startServerConfiguring}>Configure Server</Button> */}
-                        <Button onClick={startServerConfiguring} className="cursor-pointer text-4xl p-8" >{translations.serverConfigure}</Button>
-                    </li>
-                </ul>
+                <Card>
+                    <CardContent>
+                        <ul className="text-4xl items-center pt-4">
+                            <li className="mb-4">
+                                <button onClick={handleGitHubReleases} className="cursor-pointer" >
+                                    1. {translations.downloadServerHere}: GitHub Releases
+                                </button>
+                            </li>
+                            <li className="mb-4">
+                                2. {translations.unzipServer}
+                            </li>
+                            <li className="mb-4" >
+                                3. {translations.chooseWhereServerSaved} <Button onClick={handleSetupServer} className="cursor-pointer text-4xl p-8 mb-4"> {translations.placementOfServer}</Button>
+                                <p className="mb-8">{translations.chosenPath}: <code className="font-bold italic bg-gray-300 rounded-xl p-2">{pathToServer}</code></p>
+                            </li>
+                            <li className="mb-4" >
+                                <Button onClick={startServerConfiguring} className="cursor-pointer text-4xl p-8" >{translations.serverConfigure}</Button>
+                            </li>
+                        </ul>
+                    </CardContent>
+                </Card>
             )}
         </div>
     )

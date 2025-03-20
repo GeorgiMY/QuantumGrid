@@ -14,6 +14,7 @@ electron.contextBridge.exposeInMainWorld("electron", {
     getEnvFile: (serverPath: string) => ipcRenderer.invoke("get-env-file", serverPath),
     fetchClientConfig: () => ipcRenderer.invoke("fetch-client-config"),
     saveClientConfig: (data: object, filePath: string) => ipcRenderer.invoke("save-client-config", data, filePath),
+    saveENVFile: (data: object, filePath: string) => ipcRenderer.invoke("save-env-file", data, filePath),
     //backend to frontend
     responseOpenDialog: (callback: any) => ipcRenderer.on("response-open-dialog", (event, { path, data }) => {
         callback({ path, data })

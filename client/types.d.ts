@@ -109,6 +109,7 @@ interface Window {
         getServerConfig,
         getEnvFile,
         fetchClientConfig,
-        saveClientConfig
+        saveClientConfig,
+        saveENVFile
     }
 }
