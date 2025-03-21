@@ -2,25 +2,43 @@ import cron from "node-cron";
 import fs from 'fs/promises';
 import path from 'path';
 import WebSocket from "ws";
+import { getClientConfig } from "./utils/config.js";
+
+type fileData = {
+    name: string;
+    content: string;
+}
 
 // Declare global variables to hold file pathss and sizes
-let currentFileData: { path: string; size: number }[] = [];
-let previousFileData: { path: string; size: number }[] = [];
+let currentFileData: fileData[] = [];
+let previousFileData: fileData[] = [];
+let directoryPath: string;
 
-// Function to check for existing data in the /data/processed folder
+// Function to check for existing data in the folder specified in the config
 async function checkProcessedData() {
-    const directoryPath = path.join(__dirname, '/data/processed');
-
     try {
+        const clientConfig = await getClientConfig();
+
+        if (!clientConfig["data-for-depositing"]) {
+            throw new Error("Missing data-for-depositing configuration");
+        }
+
+        directoryPath = clientConfig["data-for-depositing"];
+
         const files = await fs.readdir(directoryPath);
 
         currentFileData = await Promise.all(files.map(async (file: string) => {
             const filePath = path.join(directoryPath, file);
-            const stats = await fs.stat(filePath);
-            return { path: filePath, size: stats.size };
+            const content = await fs.readFile(filePath, 'utf-8');
+            return {
+                name: file,
+                content: content
+            } as fileData;
         }));
     } catch (error) {
         console.error('Error reading processed data:', error);
+        // Reset current data if there's an error
+        currentFileData = [];
     }
 }
 
@@ -32,12 +50,32 @@ export function startSendingDataPeriodically(period: number, ws: WebSocket): cro
     const cronJob = cron.schedule(`*/${period} * * * * *`, async () => {
         console.log("Cron job triggered");
 
-        await checkProcessedData();
+        try {
+            await checkProcessedData();
 
-        if (currentFileData == previousFileData) previousFileData = currentFileData;
-        else {
-            ws.send(JSON.stringify(currentFileData));
-            console.log("Data was sent to the server");
+            const currentDataString = JSON.stringify(currentFileData);
+            const previousDataString = JSON.stringify(previousFileData);
+
+            if (currentDataString === previousDataString && currentFileData.length > 0) {
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.send(currentDataString);
+                    console.log("Data was sent to the server");
+
+                    // Only delete files after successful send
+                    const files = await fs.readdir(directoryPath);
+                    await Promise.all(files.map(file =>
+                        fs.unlink(path.join(directoryPath, file))
+                    ));
+                    console.log("Files deleted after successful send");
+                } else {
+                    console.warn("WebSocket is not open, skipping send");
+                }
+            }
+
+            previousFileData = JSON.parse(JSON.stringify(currentFileData));
+
+        } catch (error) {
+            console.error('Error in cron job:', error);
         }
     });
 

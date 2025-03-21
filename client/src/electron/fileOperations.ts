@@ -1,5 +1,5 @@
 import { BrowserWindow, dialog, OpenDialogReturnValue } from "electron/main";
-import { log } from "./logging.js";
+import { log } from "./utils/logging.js";
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 

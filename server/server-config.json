@@ -6,6 +6,7 @@
     "type-of-data-distributed": "mongodb",
     "local-json-path": "./data/specs/cpu.json",
     "mongodb-collection-name": "grades",
+    "mongodb-collection-name-for-depositing": "gradesreceive",
     "type-of-data-deposition": "mongodb",
     "batch-size": 100,
     "blacklist": true,

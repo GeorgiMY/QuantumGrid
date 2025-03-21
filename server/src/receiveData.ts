@@ -40,7 +40,7 @@ export async function saveJSONToMongoDB(data: object) {
 // Saves JSON objects to MongoDB
 export async function saveJSONsToMongoDB(data: object[]) {
     const config = getServerConfig();
-    const collectionName: string = config["mongodb-collection-name"];
+    const collectionName: string = config["mongodb-collection-name-for-depositing"];
 
     try {
         const result = await insertNewDocuments(collectionName, data);

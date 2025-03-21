@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { log } from './logging.js';
+import { log } from './utils/logging.js';
 
 // Saves a JSON object in a new file in /data/unprocessed
 export function saveJSONFileLocally(data: any, filename: string): void {

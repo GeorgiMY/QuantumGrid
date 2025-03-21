@@ -4,7 +4,7 @@ import { getPreloadPath, getUIPath } from "./pathResolver.js";
 import { getJSONFromFile, getServerPath, saveENVFile, saveJSONToFile } from "./fileOperations.js";
 import { connectToServer, disconnectFromServer, isWsConnected } from "./websocketFunctions.js";
 import { getEnvFile } from "./configureServer.js";
-import { log } from "./logging.js";
+import { log } from "./utils/logging.js";
 
 let mainWindow: BrowserWindow;
 
