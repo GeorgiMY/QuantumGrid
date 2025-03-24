@@ -1,9 +1,25 @@
 ---
-title: Create a Server
-description: Learn how to create a production-ready distributed computing server using Quantum Grid step by step
+title: Setup Your MongoDB Distribution
+description: Learn how to make your Quantum Grid server distribute data from MongoDB
 ---
 
-1. Download the server from here: [GitHub Releases](https://github.com/GeorgiMY/QuantumGrid/releases)
-1. Extract the server.
-1. Select the path where the extracted server is stored.
-1. Click on the "Configure Server" button.
+If you haven't downloaded a server, first follow these instructions - [Download Server](https://www.quantumgrid.info/docs/configure-server/download-server)
+
+After downloding the server:
+1. Start the Quantum Grid software.
+1. Click the **"Configure Server"** tab.
+1. Click on the Server Placement button.
+1. Select the folder where you unzipped the server.
+1. Click on the **"Configure Server"** button.
+
+There are 3 important settings you need to change to make your server distribute data from MongoDB:
+1. **"Type of data distributed"** should be set to MongoDB.
+2. **"MongoDB Collection Name"** should be set to the name of the collection you want to extract data from.
+
+Setting Type of data distributed to MongoDB makes the **"MONGODB_URI"** option pop up at the bottom of the page.
+
+3. **"MONGODB_URI"** should be set to your MongoDB connection string.
+
+Here's a link to an article if you don't know how to find your MongoDB uri - [Find Your Connection String](https://www.mongodb.com/docs/manual/reference/connection-string/)
+
+**That's it!** Your server can now distribute data from MongoDB! You can tweak the rest of your settings however you'd like!

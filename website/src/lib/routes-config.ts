@@ -26,7 +26,6 @@ export const ROUTES: EachRoute[] = [
     {
         title: "Configure Server",
         href: "/configure-server",
-        noLink: true,
         items: [
             {
                 title: "Download Server",
@@ -34,13 +33,7 @@ export const ROUTES: EachRoute[] = [
             },
             {
                 title: "Setup For MongoDB",
-                href: "/mongodb-setup",
-                items: [
-                    {
-                        title: "Environment Variable",
-                        href: "/env"
-                    }
-                ]
+                href: "/mongodb-setup"
             }
         ]
     },
