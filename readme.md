@@ -9,7 +9,9 @@
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## <a name="english">What is QuantumGrid?</a> 
+## <a name="english">What is QuantumGrid?</a>
+Quantum Grid is a program that synchronizes computational power between multiple devices allowing for easy horizontal scaling. The program handles the data distribution to the different connected devices, which leaves the user to decide how they want the data to be processed on the previously mentioned connected devices with a software they make. Quantum Grid can also be a volunteer computing system, if you so wish it to be. The distribution currently only works with MongoDB. 
+
 QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets you create a server which distributes data to a device as well as the software for processing that data. QuantumGrid's software also lets devices connect to the specific server they want to connect with which automatically starts using their processing power to contribute to processing the data.
 
 ### Works With:
@@ -51,7 +53,7 @@ QuantumGrid is a Distributed Computing Framework. QuantumGrid's software lets yo
 
 #### When You're Creating a Server - A production-ready Express.js server is set up.
 
-#### When You're Connecting to a Server - Your device tries to establish a websocket connection with the server
+#### When You're Connecting to a Server - Your device tries to establish a WebSocket connection with the server
 
 ## <a name="bulgarian">Какво е Квантов Грид?</a>
 Квантов Грид е рамка за разпределени изчисления. Софтуерът на Квантов Грид ви позволява да създадете сървър, който разпределя данни към устройство, както и софтуер за обработка на тези данни. Софтуерът на Квантов Грид също така позволява на устройства да се свързват със специфичен сървър, към който искат да се присъединят, като автоматично започват да използват изчислителната си мощност, за да допринасят за обработката на данните.
