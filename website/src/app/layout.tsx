@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     type="text/css"
                     href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
                 />
+                <script src="https://analytics.ahrefs.com/analytics.js" data-key="44b2Hi6i6fhcb8Iudo3k/A" async></script>
             </head>
             <body suppressHydrationWarning className={inter.className}>
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
